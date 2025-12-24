@@ -14,7 +14,7 @@ function SearchBar() {
         setsearchValue('');
     }
   return (
-    <div className='relative flex items-center justify-end ' >
+    <div className='relative flex items-center justify-end' >
         {
             isOpen? (
             <form onSubmit={handleSearchBar} className='absolute flex items-center bg-gray-900' >
@@ -26,10 +26,10 @@ function SearchBar() {
                     onChange={(e)=>setsearchValue(e.target.value)}
                     className='p-2 border border-white  rounded'
                     />
-                    <button type='submit'>
+                    <button type='submit' className='cursor-pointer'>
                         <IoIosSearch className='w-7 h-7' />
                     </button>
-                    <button>
+                    <button className='cursor-pointer'>
                         <IoMdClose onClick={ToggleSearch}/>
                     </button>
                 </div>

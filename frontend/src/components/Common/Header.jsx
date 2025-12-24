@@ -29,18 +29,19 @@ function Header() {
               <CiUser className="w-5 h-5" />
             </Link>
 
-            <button onClick={() => setDrawerOpen(true)} className="relative">
+            <button onClick={() => setDrawerOpen(true)} className="relative cursor-pointer">
               <LiaShoppingBagSolid className="w-5 h-5" />
               <span className="absolute -top-2 -right-2 bg-red-500 rounded-full text-white px-1.5 text-sm">
                 4
               </span>
             </button>
+            <div className="overflow-hidden">
+              <SearchBar />
+            </div>
 
-            <button className="md:hidden">
+            <button className="md:hidden cursor-pointer">
               <HiBars3BottomRight />
             </button>
-
-            <SearchBar />
           </div>
 
         </div>
