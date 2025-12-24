@@ -8,6 +8,7 @@ import CartDrawer from "./CartDrawer";
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <>
       <nav className="bg-gray-900 text-white">
@@ -19,7 +20,7 @@ function Header() {
             </Link>
           </div>
 
-          <div className="flex font-bold space-x-10">
+          <div className="hidden md:flex font-bold space-x-10">
             <Link to="/" className="hover:text-gray-400">New Arrival</Link>
             <Link to="/" className="hover:text-gray-400">Best Seller</Link>
           </div>
@@ -35,18 +36,34 @@ function Header() {
                 4
               </span>
             </button>
-            <div className="overflow-hidden">
-              <SearchBar />
-            </div>
-
-            <button className="md:hidden cursor-pointer">
+            <SearchBar />
+            <button onClick={() => setMobileMenuOpen(prev => !prev)} className="md:hidden cursor-pointer">
               <HiBars3BottomRight />
             </button>
           </div>
-
         </div>
       </nav>
       <CartDrawer drawerOpen={drawerOpen} toggledrawerOpen={setDrawerOpen} />
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed top-20 left-0 h-full w-3/4 md:hidden bg-gray-800 text-white px-6 py-4 space-y-4">
+          <h3 className="font-bold py-3 border-b border-gray-600">Menu</h3>
+          <Link
+            to="/"
+            className="block hover:text-gray-400"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            New Arrival
+          </Link>
+          <Link
+            to="/"
+            className="block hover:text-gray-400"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            Best Seller
+          </Link>
+        </div>
+      )}
     </>
   )
 }

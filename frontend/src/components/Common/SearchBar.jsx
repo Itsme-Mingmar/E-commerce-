@@ -24,7 +24,7 @@ function SearchBar() {
                     placeholder='Search'
                     value={searchValue}
                     onChange={(e)=>setsearchValue(e.target.value)}
-                    className='p-2 border border-white  rounded'
+                    className='p-2 border border-white  rounded w-40 sm:w-56 md:w-72'
                     />
                     <button type='submit' className='cursor-pointer'>
                         <IoIosSearch className='w-7 h-7' />
@@ -35,7 +35,7 @@ function SearchBar() {
                 </div>
             </form>
             ) : (
-                <button onClick={ToggleSearch}>
+                <button onClick={ToggleSearch} className='cursor-pointer'>
                     <IoIosSearch className='w-5.5 h-5.5' />
                 </button>
             )
