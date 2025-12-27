@@ -46,7 +46,7 @@ function Header() {
       <CartDrawer drawerOpen={drawerOpen} toggledrawerOpen={setDrawerOpen} />
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed top-20 left-0 h-full w-3/4 md:hidden bg-gray-800 text-white px-6 py-4 space-y-4">
+        <div className="fixed z-40 top-20 left-0 h-full w-3/4 md:hidden bg-gray-800 text-white px-6 py-4 space-y-4">
           <h3 className="font-bold py-3 border-b border-gray-600">Menu</h3>
           <Link
             to="/"

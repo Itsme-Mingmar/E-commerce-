@@ -5,7 +5,7 @@ function CartDrawer({ drawerOpen, toggledrawerOpen }) {
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-3/4 md:w-1/3 bg-gray-800 text-white flex flex-col shadow-lg transition-transform duration-300 ${drawerOpen ? "translate-x-0" : "translate-x-full"
+      className={`fixed z-50 top-0 right-0 h-full w-3/4 md:w-1/3 bg-gray-800 text-white flex flex-col shadow-lg transition-transform duration-300 ${drawerOpen ? "translate-x-0" : "translate-x-full"
         }`}
     >
 
