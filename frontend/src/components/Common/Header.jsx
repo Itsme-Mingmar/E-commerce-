@@ -5,10 +5,25 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import SearchBar from "./SearchBar";
 import CartDrawer from "./CartDrawer";
+import { useLocation, useNavigate } from "react-router-dom"
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const scrollToSection = (id) => {
+    if (location.pathname !== "/") {
+      navigate("/")
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+    }
+  }
   return (
     <>
       <nav className="bg-gray-900 text-white">
@@ -21,8 +36,19 @@ function Header() {
           </div>
 
           <div className="hidden md:flex font-bold space-x-10">
-            <Link to="/" className="hover:text-gray-400">New Arrival</Link>
-            <Link to="/" className="hover:text-gray-400">Best Seller</Link>
+            <button
+              onClick={() => scrollToSection("best-seller")}
+              className="hover:text-gray-400 cursor-pointer"
+            >
+              Best Seller
+            </button>
+
+            <button
+              onClick={() => scrollToSection("new-arrival")}
+              className="hover:text-gray-400 cursor-pointer"
+            >
+              New Arrival
+            </button>
           </div>
 
           <div className="flex space-x-5 items-center relative">
