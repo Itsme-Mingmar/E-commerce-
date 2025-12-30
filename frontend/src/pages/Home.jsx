@@ -2,6 +2,7 @@ import React from 'react'
 import hero from '../assets/hero-image.webp'
 import { Link } from 'react-router-dom'
 import NewArrival from '../components/Prouducts/NewArrival'
+import BestSeller from '../components/Prouducts/BestSeller'
 
 const Home = () => {
   return (
@@ -28,14 +29,14 @@ const Home = () => {
       </section>
       {/* NEW ARRIVAL */}
       <section id="new-arrival">
-        <div className='h-[600px]'>
+        <div className='w-full'>
           <NewArrival />
         </div>
       </section>
       {/* BEST SELLER */}
       <section id="best-seller">
-        <div className='h-[600px]'>
-          <p>Best seller</p>
+        <div>
+          <BestSeller />
         </div>
       </section>
     </>

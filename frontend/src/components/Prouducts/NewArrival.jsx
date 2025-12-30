@@ -152,7 +152,7 @@ const NewArrival = () => {
                     Fresh drops for your fitness journey
                 </p>
                 {/* Scroll Buttons */}
-                <div className="absolute right-4 bottom-[-30px] flex space-x-2">
+                <div className="absolute right-4 bottom-[-30px] flex space-x-2 my-3">
                     <button
                         onClick={scrollLeftHandler}
                         className={`p-2 rounded border ${scrollLeft
@@ -185,13 +185,13 @@ const NewArrival = () => {
                         <img
                             src={product.images[0]?.URL}
                             alt={product.name}
-                            className='w-full h-[500px] object-cover rounded-lg'
+                            className='w-full object-cover lg:h-[500px] rounded-lg h-[400px]'
                             draggable='false'
                         />
                         <div className='absolute bottom-0 left-0 right-0 bg-opacity-50 backdrop-blur-md text-whit p-4 rounded-b-lg' draggable='false'>
                             <Link to={`/product/${product._id}`} className='block'>
-                                <h4 className='font-medium'>{product.name}</h4>
-                                <p className='mt-1'>${product.price}</p>
+                                <h4 className='font-semibold text-lg line-clamp-1'>{product.name}</h4>
+                                <p className='font-bold text-lg'>Rs. {product.price}</p>
                             </Link>
                         </div>
                     </div>
