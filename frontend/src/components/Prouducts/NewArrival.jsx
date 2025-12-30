@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
 const NewArrival = () => {
+    const scrollRef = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeftPos, setScrollLeftPos] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(true);
+
     const newArrivals = [
         {
             productId: 1,
@@ -82,34 +89,109 @@ const NewArrival = () => {
             ]
         },
     ]
+
+    const updateScrollButtons = () => {
+        const container = scrollRef.current
+
+        if (!container) return
+
+        const isAtStart = container.scrollLeft <= 0
+        const isAtEnd =
+            container.scrollLeft + container.clientWidth >=
+            container.scrollWidth - 1
+
+        setScrollLeft(!isAtStart)
+        setCanScrollRight(!isAtEnd)
+    }
+
+    const scrollLeftHandler = () => {
+        scrollRef.current.scrollBy({
+            left: -300,
+            behavior: "smooth",
+        })
+    }
+
+    const scrollRightHandler = () => {
+        scrollRef.current.scrollBy({
+            left: 300,
+            behavior: "smooth",
+        })
+    }
+    // mouse scroll drag scrolling
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true)
+        setStartX(e.pageX - scrollRef.current.offsetLeft)
+        setScrollLeftPos(scrollRef.current.scrollLeft)
+    }
+
+    const handleMouseLeave = () => {
+        setIsDragging(false)
+    }
+
+    const handleMouseUp = () => {
+        setIsDragging(false)
+    }
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return
+
+        e.preventDefault()
+        const x = e.pageX - scrollRef.current.offsetLeft
+        const walk = (x - startX) * 1.5 // scroll speed
+        scrollRef.current.scrollLeft = scrollLeftPos - walk
+    }
+
+
+
     return (
-        <section>
-            <div className='container mx-auto text-center mb-10 relative'>
+        <section className='py-10 px-10 mb-10'>
+            <div className='container mx-auto text-center relative'>
                 <h2 className="text-3xl font-bold mb-4">Explore New Arrival</h2>
                 <p className="text-lg uppercase tracking-wider text-gray-600 mb-8">
                     Fresh drops for your fitness journey
                 </p>
                 {/* Scroll Buttons */}
-                <div className='absolute right-0 bottom-[-30px] flex space-x-2'>
-                    <button className='p-2 rounded border bg-white text-black'>
-                        <FiChevronRight />
-                    </button>
-                    <button className='p-2 rounded border bg-white text-black'>
+                <div className="absolute right-4 bottom-[-30px] flex space-x-2">
+                    <button
+                        onClick={scrollLeftHandler}
+                        className={`p-2 rounded border ${scrollLeft
+                            ? "bg-white text-black cursor-pointer"
+                            : "bg-gray-200 text-gray-400"
+                            }`}
+                    >
                         <FiChevronLeft />
                     </button>
 
+                    <button
+                        onClick={scrollRightHandler}
+                        className={`p-2 rounded border ${canScrollRight
+                            ? "bg-white text-black cursor-pointer"
+                            : "bg-gray-200 text-gray-400"
+                            }`}
+                    >
+                        <FiChevronRight />
+                    </button>
                 </div>
+
             </div>
             {/* Scrollable Content */}
-            <div className='container mx-auto overflow-x-scroll flex space-x-6 relative'>
+            <div ref={scrollRef} onScroll={updateScrollButtons} onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove} className='container mx-auto overflow-x-scroll flex space-x-6 relative'>
                 {newArrivals.map((product) => (
-                    <div key={product._id}>
+                    <div key={product._id} className='min-w-[100%] sm:min-w-[30%] relative'>
                         <img
                             src={product.images[0]?.URL}
                             alt={product.name}
+                            className='w-full h-[500px] object-cover rounded-lg'
+                            draggable='false'
                         />
-                        <div className='absolute bottom-0 left-0 right-0 bg-opacity-50 backdrop-blur-md text-whit p-4 rounded-b-lg'>
-                            <Link to={`/product/${product._id}`}className='block'>
+                        <div className='absolute bottom-0 left-0 right-0 bg-opacity-50 backdrop-blur-md text-whit p-4 rounded-b-lg' draggable='false'>
+                            <Link to={`/product/${product._id}`} className='block'>
+                                <h4 className='font-medium'>{product.name}</h4>
+                                <p className='mt-1'>${product.price}</p>
                             </Link>
                         </div>
                     </div>
