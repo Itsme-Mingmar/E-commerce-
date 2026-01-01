@@ -8,6 +8,7 @@ const ProductDetails = () => {
     const product = {
         _id: id,
         name: "Whey Protein",
+        quantity: 1,
         price: 4500,
         description: "High quality whey protein for muscle growth.",
         images: [
@@ -23,7 +24,7 @@ const ProductDetails = () => {
         <div className="container mx-auto px-25 py-12">
 
             {/* Product Info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* LEFT: Image Section */}
                 <div className="flex flex-col md:flex-row gap-4 ">
@@ -52,10 +53,17 @@ const ProductDetails = () => {
 
                 {/* RIGHT: Details */}
                 <div>
-                    <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-                    <p className="text-xl font-semibold mb-4">Rs. {product.price}</p>
-                    <p className="text-gray-600 mb-6">{product.description}</p>
-                    <button className="bg-amber-400 px-25 py-2 rounded-lg font-semibold">
+                    <h1 className="text-3xl font-bold mb-3">{product.name}</h1>
+                    <p className="text-xl text-red-700 mb-3">Rs. {product.price}</p>
+                    <p className="text-gray-600 mb-5">{product.description}</p>
+                    <div className="flex pb-5">
+                        <p className="mr-6">Quantity</p>
+                        <button className="border rounded px-2 py-1 text-xl font-medium cursor-pointer">-</button>
+                        <span className="mx-4 mt-2">{product.quantity}</span>
+                        <button className="border rounded px-2 py-1 text-xl font-medium cursor-pointer">+</button>
+                    </div>
+
+                    <button className="bg-amber-400 px-20 lg:px-30 py-2 rounded-lg font-semibold cursor-pointer">
                         Add to Cart
                     </button>
                 </div>
