@@ -8,7 +8,6 @@ const ProductDetails = () => {
     const product = {
         _id: id,
         name: "Whey Protein",
-        quantity: 1,
         price: 4500,
         description: "High quality whey protein for muscle growth.",
         images: [
@@ -18,8 +17,13 @@ const ProductDetails = () => {
         category: "Protein"
     }
 
-    const [activeImage, setActiveImage] = useState(product.images[0].URL)
+    const HandleQuantity = (action) =>{
+        if(action=="plus") setQuantity((pre) => pre+1);
+        if(action=="minus" && quantity>1) setQuantity((pre) => pre-1)
+    }
 
+    const [activeImage, setActiveImage] = useState(product.images[0].URL)
+    const [quantity, setQuantity] = useState(1);
     return (
         <div className="container mx-auto px-25 py-12">
 
@@ -56,13 +60,12 @@ const ProductDetails = () => {
                     <h1 className="text-3xl font-bold mb-3">{product.name}</h1>
                     <p className="text-xl text-red-700 mb-3">Rs. {product.price}</p>
                     <p className="text-gray-600 mb-5">{product.description}</p>
-                    <div className="flex pb-5">
-                        <p className="mr-6">Quantity</p>
-                        <button className="border rounded px-2 py-1 text-xl font-medium cursor-pointer">-</button>
-                        <span className="mx-4 mt-2">{product.quantity}</span>
-                        <button className="border rounded px-2 py-1 text-xl font-medium cursor-pointer">+</button>
+                    <div className="flex items-center space-x-4 pb-5">
+                        <p className="mr-6 inline-block">Quantity</p>
+                        <button onClick={()=> HandleQuantity("minus")} className="rounded bg-gray-200 px-2 py-1 text-lg font-medium cursor-pointer">-</button>
+                        <span >{quantity}</span>
+                        <button onClick={()=> HandleQuantity("plus")} className="rounded bg-gray-200 px-2 py-1 text-lg font-medium cursor-pointer">+</button>
                     </div>
-
                     <button className="bg-amber-400 px-20 lg:px-30 py-2 rounded-lg font-semibold cursor-pointer">
                         Add to Cart
                     </button>

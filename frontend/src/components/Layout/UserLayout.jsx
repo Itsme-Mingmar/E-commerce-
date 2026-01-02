@@ -6,11 +6,11 @@ import { Outlet } from 'react-router-dom';
 function UserLayout() {
   return (
     <>
-        <Header/>
-        <main>
-          <Outlet/>
-        </main>
-        <Footer/>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
     </>
   )
 }
