@@ -34,7 +34,7 @@ const Login = () => {
 
       {/* Right Form */}
       <div className="flex items-center justify-center px-6">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md p-8 rounded-lg border border-black/30">
 
           <h1 className="text-3xl font-bold mb-2">Welcome Back </h1>
           <p className="text-gray-600 mb-8">
@@ -54,8 +54,8 @@ const Login = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="you@example.com"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                placeholder="example@gmail.com"
+                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2"
               />
             </div>
 
@@ -71,7 +71,7 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="••••••••"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2"
               />
             </div>
 
@@ -88,7 +88,7 @@ const Login = () => {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full bg-amber-400 hover:bg-amber-500 transition py-3 rounded-lg font-semibold"
+              className="w-full bg-amber-400 hover:bg-amber-500 transition py-3 rounded-lg font-semibold cursor-pointer"
             >
               Login
             </button>
