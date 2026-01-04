@@ -29,17 +29,8 @@ const Register = () => {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
 
-      {/* Left Image */}
-      <div className="hidden md:block">
-        <img
-          src="https://picsum.photos/800/900?gym"
-          alt="Register"
-          className="w-full h-full object-cover"
-        />
-      </div>
-
       {/* Form Section */}
-      <div className="flex items-center justify-center px-6 ">
+      <div className="flex items-center justify-center px-6  ">
         <div className="w-full max-w-md border p-8 rounded-lg border-black/30">
 
           <h1 className="text-3xl font-bold mb-2">
@@ -134,6 +125,15 @@ const Register = () => {
           </p>
 
         </div>
+      </div>
+      
+      {/* Right Image */}
+      <div className="hidden md:block">
+        <img
+          src="https://picsum.photos/700/800?gym"
+          alt="Register"
+          className="w-full h-full object-cover"
+        />
       </div>
 
     </div>

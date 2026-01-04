@@ -23,18 +23,9 @@ const Login = () => {
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
 
-      {/* Left Image (Desktop Only) */}
-      <div className="hidden md:block">
-        <img
-          src="https://picsum.photos/800/900?fitness"
-          alt="Login"
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Right Form */}
-      <div className="flex items-center justify-center px-6">
-        <div className="w-full max-w-md p-8 rounded-lg border border-black/30">
+      {/* Left Form */}
+      <div className="flex items-center justify-center px-4">
+        <div className="w-full max-w-md p-4 rounded-lg border border-black/30">
 
           <h1 className="text-3xl font-bold mb-2">Welcome Back </h1>
           <p className="text-gray-600 mb-8">
@@ -104,6 +95,15 @@ const Login = () => {
           </p>
 
         </div>
+      </div>
+
+      {/* Right Image (Desktop Only) */}
+      <div className="hidden md:block">
+        <img
+          src="https://picsum.photos/700/800?fitness"
+          alt="Login"
+          className="w-full h-full object-cover"
+        />
       </div>
 
     </div>
