@@ -81,7 +81,7 @@ const filterProduct = asyncHandler(async(req, res)=>{
   const {keyword, category, tags, weight} = req.query;
   const filter = {};
   if(keyword){
-    filter.$or = [{name: {$regex: keyword, $options: "i"}}, {discription: {$regex: keyword, $options: "i"}}];
+    filter.$or = [{name: {$regex: keyword, $options: "i"}}, {description: {$regex: keyword, $options: "i"}}];
   }
   if(category){
     filter.category = category;
@@ -90,7 +90,7 @@ const filterProduct = asyncHandler(async(req, res)=>{
     filter.tags = tags;
   }
   if(weight){
-    filter.weight = weight;
+    filter.weight = Number(weight);
   }
   const product = await Product.find(filter);
   res.status(200).json(

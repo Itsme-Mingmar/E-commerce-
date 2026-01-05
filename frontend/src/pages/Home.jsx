@@ -16,7 +16,7 @@ const Home = () => {
               Power your performance. <br />
               {/* Button */}
               <Link
-                to="#"
+                to='/collections/all'
                 className="mt-8 text-2xl bg-amber-400 hover:bg-amber-500 
                        text-black px-4 py-2 rounded-lg
                        transition duration-300"

@@ -11,13 +11,6 @@ const ProductCard = ({ product }) => {
           alt={product.name}
           className="w-full h-64 object-cover group-hover:scale-105 transition duration-300"
         />
-
-        {/* Badge */}
-        {product.isBestSeller && (
-          <span className="absolute top-3 left-3 bg-amber-400 text-black text-xs px-3 py-1 rounded-full font-semibold">
-            Best Seller
-          </span>
-        )}
       </div>
 
       {/* Content */}
