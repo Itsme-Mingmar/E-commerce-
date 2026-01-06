@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Collections from './pages/Collections';
+import Checkout from './pages/CheckOut';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/checkout' element={<Checkout />} />
           <Route path='/collections/:collection' element={<Collections />} />
           <Route path='/product/:id' element={<ProductDetails />} />
         </Route>
