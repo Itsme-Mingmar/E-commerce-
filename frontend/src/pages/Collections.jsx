@@ -53,7 +53,7 @@ const Collection = () => {
         <h2 className="text-xl font-semibold">Products</h2>
         <button
           onClick={() => setIsFilterOpen(true)}
-          className="flex items-center gap-2 border px-4 py-2 rounded"
+          className="flex items-center gap-2 border px-4 py-2 rounded cursor-pointer"
         >
           <FiFilter />
           Filter
@@ -78,7 +78,7 @@ const Collection = () => {
 
       {/* MOBILE FILTER DRAWER */}
       <div
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity
+        className={`fixed inset-0 bg-black/60 z-40 transition-opacity
         ${isFilterOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={() => setIsFilterOpen(false)}
       />
@@ -89,7 +89,7 @@ const Collection = () => {
       >
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-lg font-semibold">Filter</h3>
-          <button onClick={() => setIsFilterOpen(false)}>
+          <button className="cursor-pointer" onClick={() => setIsFilterOpen(false)}>
             <IoMdClose size={22} />
           </button>
         </div>

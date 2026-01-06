@@ -6,7 +6,7 @@ const ProductFilter = ({ filters, setFilters }) => {
       <div>
         <h4 className="font-semibold mb-2">Category</h4>
         <select
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded cursor-pointer"
           value={filters.category}
           onChange={(e) =>
             setFilters({ ...filters, category: e.target.value })
@@ -25,7 +25,7 @@ const ProductFilter = ({ filters, setFilters }) => {
       <div>
         <h4 className="font-semibold mb-2">Tag</h4>
         <select
-          className="w-full border p-2 rounded"
+          className="w-full border p-2 rounded cursor-pointer"
           value={filters.tags}
           onChange={(e) =>
             setFilters({ ...filters, tags: e.target.value })
