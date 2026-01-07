@@ -16,6 +16,20 @@ const SimilarProducts = ({ category }) => {
       price: 3200,
       category: "Protein",
       images: [{ URL: "https://picsum.photos/400?2" }]
+    },
+    {
+      _id: "3",
+      name: "BCAA Energy",
+      price: 3200,
+      category: "Protein",
+      images: [{ URL: "https://picsum.photos/400?2" }]
+    },
+    {
+      _id: "3",
+      name: "BCAA Energy",
+      price: 3200,
+      category: "Protein",
+      images: [{ URL: "https://picsum.photos/400?2" }]
     }
   ]
 

@@ -117,25 +117,27 @@ const Checkout = ({ cart }) => {
                     <div className="border rounded-lg p-6">
                         <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
 
-                        <div className="space-y-3">
-                            <label className="flex items-center gap-3">
+                        <div className="space-y-6">
+                            <label className="flex p-5 items-center gap-6 border rounded cursor-pointer select-none">
                                 <input
                                     type="radio"
                                     value="Cash on Delivery"
                                     checked={paymentMethod === "Cash on Delivery"}
                                     onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
-                                Cash on Delivery
+                                <p className="font-bold">PayPal</p>
+                                <img className="w-30 ml-40 " src="paypal.png" alt="" />
                             </label>
 
-                            <label className="flex items-center gap-3">
+                            <label className="flex items-center gap-6 p-5 border rounded cursor-pointer select-none">
                                 <input
                                     type="radio"
                                     value="Online Payment"
                                     checked={paymentMethod === "Online Payment"}
                                     onChange={(e) => setPaymentMethod(e.target.value)}
                                 />
-                                Online Payment
+                                <p className="font-bold">Khalti</p>
+                                <img className="w-30 ml-40  " src="khalti.png" alt="" />
                             </label>
                         </div>
                     </div>
@@ -171,12 +173,16 @@ const Checkout = ({ cart }) => {
                             </div>
                         ))}
                     </div>
+                    <div className="flex justify-between my-6">
+                        <p className="font-bold">Total Price:</p>
+                        <p className="font-medium">Rs.3500</p>
+                    </div>
                     <button
                         onClick={placeOrderHandler}
                         disabled={loading}
-                        className="w-full mt-6 bg-amber-400 text-white py-3 rounded-lg hover:bg-amber-500 cursor-pointer"
+                        className="w-full mt-6 bg-amber-400 font-semibold py-3 rounded-lg hover:bg-amber-500 cursor-pointer"
                     >
-                        {loading ? "Processing..." : "Place Order"}
+                        {loading ? "Processing..." : "Continue to Payment"}
                     </button>
                 </div>
 

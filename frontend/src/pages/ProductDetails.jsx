@@ -30,7 +30,7 @@ const ProductDetails = () => {
             {/* Product Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                {/* LEFT: Image Section */}
+                {/* LEFT: Image section */}
                 <div className="flex flex-col md:flex-row gap-4 ">
 
                     {/* Thumbnails */}
