@@ -21,8 +21,8 @@ const orderSchema = new Schema(
         type: Schema.Types.ObjectId, 
         ref: "user", required: true 
     },
-    items: { type: 
-        [orderItemSchema], 
+    items: { 
+        type: [orderItemSchema], 
         required: true 
     },
 
