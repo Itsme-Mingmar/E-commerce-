@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 const Checkout = ({ cart }) => {
 
-  /* ------------------ DUMMY CART (UNCHANGED) ------------------ */
+  /*  DUMMY CART */
   const dummyCart = {
     product: [
       {
@@ -34,21 +34,16 @@ const Checkout = ({ cart }) => {
   cart = dummyCart
   const navigate = useNavigate()
 
-  /* ------------------ STATES ------------------ */
   const [shippingAddress, setShippingAddress] = useState({
     address: "",
     city: "",
     country: "",
   })
-
   const [paymentMethod, setPaymentMethod] = useState("Khalti")
   const [loading, setLoading] = useState(false)
-
-  /* 🔹 NEW STATES */
   const [checkoutId, setCheckoutId] = useState(null)
   const [showPaymentPopup, setShowPaymentPopup] = useState(false)
 
-  /* ------------------ HANDLERS ------------------ */
   const handleChange = (e) => {
     setShippingAddress({
       ...shippingAddress,
@@ -56,13 +51,13 @@ const Checkout = ({ cart }) => {
     })
   }
 
-  /* 🔹 UPDATED: ONLY CREATE CHECKOUT */
   const CreateCheckoutHandler = async () => {
+    /*
     if (!shippingAddress.address || !shippingAddress.city || !shippingAddress.country) {
       alert("Please fill all shipping fields")
       return
     }
-
+    */
     try {
       setLoading(true)
       setCheckoutId(123);
@@ -87,7 +82,7 @@ const Checkout = ({ cart }) => {
     }
   }
 
-  /* 🔹 PAYMENT CLICK HANDLER (MOCK) */
+  /* 
   const handlePayment = (provider) => {
     console.log("Checkout ID:", checkoutId)
     console.log("Payment Provider:", provider)
@@ -95,6 +90,7 @@ const Checkout = ({ cart }) => {
     // 🔜 later integrate real payment gateway
     navigate(`/order-success/${checkoutId}`)
   }
+  */
 
   return (
     <>
@@ -133,6 +129,7 @@ const Checkout = ({ cart }) => {
                 <input
                   type="text"
                   name="country"
+                  required
                   placeholder="Country"
                   className="w-full border p-3 rounded"
                   value={shippingAddress.country}
@@ -193,7 +190,7 @@ const Checkout = ({ cart }) => {
             <button
               onClick={CreateCheckoutHandler}
               disabled={loading}
-              className="w-full mt-6 bg-amber-400 py-3 rounded-lg font-semibold hover:bg-amber-500"
+              className="w-full mt-6 bg-amber-400 py-3 rounded-lg font-semibold hover:bg-amber-500 cursor-pointer"
             >
               {loading ? "Processing..." : "Continue to Payment"}
             </button>
@@ -201,7 +198,7 @@ const Checkout = ({ cart }) => {
         </div>
       </div>
 
-      {/* 🔹 PAYMENT POPUP */}
+      {/* PAYMENT POPUP */}
       {showPaymentPopup && (
         <>
           <div className="fixed inset-0 bg-black/50 z-40" />
