@@ -9,11 +9,15 @@ import Profile from './pages/Profile';
 import Collections from './pages/Collections';
 import Checkout from './pages/CheckOut';
 import Order from './pages/Order';
+import { Toaster } from 'sonner'
+
+
 
 
 function App() {
   return (
     <BrowserRouter>
+    <Toaster position='top-right' />
       <Routes>
         <Route path='/' element={<UserLayout />}>
           <Route path='/' element={<Home />} />

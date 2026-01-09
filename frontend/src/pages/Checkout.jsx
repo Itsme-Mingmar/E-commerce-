@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { toast } from 'sonner'
 
 const Checkout = ({ cart }) => {
 
@@ -52,12 +53,11 @@ const Checkout = ({ cart }) => {
   }
 
   const CreateCheckoutHandler = async () => {
-    /*
+    
     if (!shippingAddress.address || !shippingAddress.city || !shippingAddress.country) {
-      alert("Please fill all shipping fields")
+    toast.error('Please enter the shipping address');
       return
     }
-    */
     try {
       setLoading(true)
       setCheckoutId(123);
@@ -69,10 +69,10 @@ const Checkout = ({ cart }) => {
         paymentMethod,
       })
 
-      // ✅ store checkout id
+      // store checkout id
       setCheckoutId(data.data._id)
 
-      // ✅ open payment popup
+      // open payment popup
       setShowPaymentPopup(true)
       */
     } catch (error) {
