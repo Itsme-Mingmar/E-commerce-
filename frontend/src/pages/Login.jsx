@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   })
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -17,7 +19,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log("Login Data:", formData)
-    // 🔗 Connect API here later
+    // Connect API...
   }
 
   return (
@@ -31,7 +33,6 @@ const Login = () => {
           <p className="text-gray-600 mb-8">
             Login to continue your fitness journey
           </p>
-
           <form onSubmit={handleSubmit} className="space-y-5">
 
             {/* Email */}
@@ -51,12 +52,12 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div>
+            <div className="relative ">
               <label className="block text-sm font-medium mb-1">
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 required
                 value={formData.password}
@@ -64,6 +65,14 @@ const Login = () => {
                 placeholder="••••••••"
                 className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2"
               />
+              <div className="absolute right-5 top-10 cursor-pointer">
+                {showPassword ? (
+                  <FaRegEyeSlash onClick={() => setShowPassword(false)} />
+                ) : (
+                  <FaRegEye onClick={() => setShowPassword(true)} />
+                )
+                }
+              </div>
             </div>
 
             {/* Forgot Password */}
