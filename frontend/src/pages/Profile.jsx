@@ -47,7 +47,7 @@ const Profile = () => {
             {orders.map(order => (
               <Link
                 key={order.id}
-                to={`/orders/${order.id}`}
+                to={`/order/${order.id}`}
                 className="flex items-center gap-4 border rounded-lg p-4 hover:bg-gray-50 transition"
               >
                 <img

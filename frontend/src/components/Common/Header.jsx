@@ -52,6 +52,7 @@ function Header() {
           </div>
 
           <div className="flex space-x-5 items-center relative">
+            <Link to={"/admin"} className="border rounded px-2 py-1">Admin</Link>
             <Link to="/profile" className="hover:text-gray-500">
               <CiUser className="w-5 h-5" />
             </Link>

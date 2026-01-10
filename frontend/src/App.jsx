@@ -10,6 +10,7 @@ import Collections from './pages/Collections';
 import Checkout from './pages/CheckOut';
 import Order from './pages/Order';
 import { Toaster } from 'sonner'
+import AdminLayout from './components/Admin/AdminLayout';
 
 
 
@@ -25,9 +26,12 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/checkout' element={<Checkout />} />
-          <Route path='/order' element={<Order />} />
+          <Route path='/order/:id' element={<Order />} />
           <Route path='/collections/:collection' element={<Collections />} />
           <Route path='/product/:id' element={<ProductDetails />} />
+        </Route>
+        <Route path='/admin' element={<AdminLayout />}>
+        {/* admin route */}
         </Route>
       </Routes>
     </BrowserRouter>

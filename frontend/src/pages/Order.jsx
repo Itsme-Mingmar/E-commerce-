@@ -38,18 +38,6 @@ const Order = () => {
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-10">
-            {/* SUCCESS HEADER */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-6 flex items-center gap-4 mb-8">
-                <div>
-                    <h2 className="text-2xl font-semibold text-green-700">
-                        Order Placed Successfully
-                    </h2>
-                    <p className="text-sm text-gray-600">
-                        Thank you for your purchase!
-                    </p>
-                </div>
-            </div>
-
             {/* MAIN CONTENT */}
             <div className="grid md:grid-cols-3 gap-6">
                 {/* LEFT SIDE */}
