@@ -15,11 +15,11 @@ const AdminLayout = () => {
   return (
     <>
       {/* ===== MOBILE TOP BAR ===== */}
-      <div className="md:hidden flex items-center justify-between px-4 py-4 border-b">
+      <div className="md:hidden flex items-center justify-between px-4 py-4 border-b bg-gray-900">
         <button onClick={() => setMenuOpen(true)}>
-          <FaBars size={22} />
+          <FaBars size={22} className="text-white cursor-pointer" />
         </button>
-        <p className="font-bold text-lg">Admin Dashboard</p>
+        <p className="font-bold text-lg text-white">Admin Dashboard</p>
       </div>
 
       {/* ===== OVERLAY (MOBILE ONLY) ===== */}
@@ -49,7 +49,7 @@ const AdminLayout = () => {
           {/* Close button (mobile only) */}
           <button
             onClick={() => setMenuOpen(false)}
-            className="md:hidden"
+            className="md:hidden cursor-pointer"
           >
             <FaTimes size={20} />
           </button>
