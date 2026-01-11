@@ -87,9 +87,9 @@ const Collection = () => {
         className={`fixed top-0 right-0 h-full w-3/4 bg-white z-50 p-6 transition-transform
         ${isFilterOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6 border-b border-gray-900">
           <h3 className="text-lg font-semibold">Filter</h3>
-          <button className="cursor-pointer" onClick={() => setIsFilterOpen(false)}>
+          <button className="cursor-pointer pb-6" onClick={() => setIsFilterOpen(false)}>
             <IoMdClose size={22} />
           </button>
         </div>
