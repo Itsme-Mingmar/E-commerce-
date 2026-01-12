@@ -78,13 +78,13 @@ const Collection = () => {
 
       {/* MOBILE FILTER DRAWER */}
       <div
-        className={`fixed inset-0 bg-black/60 z-40 transition-opacity
+        className={`fixed inset-0 bg-black/60 z-40 transition-opacity md:hidden
         ${isFilterOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={() => setIsFilterOpen(false)}
       />
 
       <div
-        className={`fixed top-0 right-0 h-full w-3/4 bg-white z-50 p-6 transition-transform
+        className={`fixed top-0 right-0 h-full w-3/4 bg-white z-50 p-6 transition-transform md:hidden
         ${isFilterOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex justify-between items-center mb-6 border-b border-gray-900">

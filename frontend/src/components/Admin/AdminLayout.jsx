@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import {
   FaUsers,
   FaBars,
@@ -82,6 +82,9 @@ const AdminLayout = () => {
           </button>
         </div>
       </aside>
+      <main className="md:ml-64">
+        < Outlet />
+      </main>
     </>
   );
 };

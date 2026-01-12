@@ -11,6 +11,7 @@ import Checkout from './pages/CheckOut';
 import Order from './pages/Order';
 import { Toaster } from 'sonner'
 import AdminLayout from './components/Admin/AdminLayout';
+import AdminHomePage from './pages/AdminHomePage';
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/product/:id' element={<ProductDetails />} />
         </Route>
         <Route path='/admin' element={<AdminLayout />}>
+        <Route path='/admin' element={<AdminHomePage />} />
         {/* admin route */}
         </Route>
       </Routes>

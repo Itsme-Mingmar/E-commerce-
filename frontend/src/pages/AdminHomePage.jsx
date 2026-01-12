@@ -1,0 +1,72 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+const AdminHomePage = () => {
+    const orders = [{
+        id: "12vejw34b34i",
+        user: "Admin User",
+        price: "Rs.54600",
+        status: "Delivered"
+    }, {
+        id: "12vejwi33ub4i",
+        user: "Admin User",
+        price: "Rs.54600",
+        status: "Delivered"
+    }, {
+        id: "12vejwi32bb3ub4i",
+        user: "Admin User",
+        price: "Rs.54600",
+        status: "Delivered"
+    }, {
+        id: "12vejwi3bb3ub4i",
+        user: "Admin User",
+        price: "Rs.54600",
+        status: "Processing"
+    }
+    ]
+    return (
+        <div className='container min-h-screen p-6 md:p-12'>
+            {/* calculation */}
+            <div>
+                <p className='font-bold mb-5'>Admin Dashboard</p>
+                <div className='flex gap-3'>
+                    <div className='basis-1/3 p-3 sm:p-1 rounded shadow-md font-semibold'>
+                        <p>Revenue</p>
+                        <p>Rs.456</p>
+                    </div>
+                    <div className='basis-1/3 p-3 rounded shadow-md font-semibold'>
+                        <p>Total Orders</p>
+                        <p>4</p>
+                        <Link to="/" className='text-blue-800/80 font-light text-xs font-medium'>Manage Orders</Link>
+                    </div>
+                    <div className='basis-1/3 p-3 rounded shadow-md font-semibold'>
+                        <p>Total Products</p>
+                        <p>45</p>
+                        <Link to="/" className='text-blue-800/80 text-xs font-medium'>Manage Products</Link>
+                    </div>
+                </div>
+            </div>
+            {/* Orders */}
+            <div className='overflow-x-auto'>
+                <p className='font-bold my-5'>Recent Orders</p>
+                <div className='flex bg-gray-200 rounded p-2 font-medium text-xs'>
+                    <p className='basis-2/5'>ORDER ID</p>
+                    <p className='basis-1/5'>USER</p>
+                    <p className='basis-1/5'>TOTAL PRICE</p>
+                    <p className='basis-1/5'>STATUS</p>
+                </div>
+                {
+                    orders.map((order) => 
+                        <div key={order.id} className='flex border-b border-gray-300 p-3 font-medium text-xs overflow-auto'>
+                            <p className='basis-2/5 font-semibold'>{order.id}</p>
+                            <p className='basis-1/5'>{order.user}</p>
+                            <p className='basis-1/5'>{order.price}</p>
+                            <p className='basis-1/5'>{order.status}</p>
+                        </div>
+                    )
+                }
+            </div>
+        </div>
+    )
+}
+export default AdminHomePage
