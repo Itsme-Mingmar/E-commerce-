@@ -42,7 +42,7 @@ const AdminLayout = () => {
         {/* HEADER */}
         <div className="flex items-center justify-between px-6 py-6 border-b border-gray-700">
           <div>
-            <p className="text-xl font-bold">NutriPulse</p>
+            <Link to="/" className="text-xl font-bold">NutriPulse</Link>
             <p className="text-sm text-gray-400">Admin Panel</p>
           </div>
 
@@ -76,7 +76,7 @@ const AdminLayout = () => {
 
         {/* LOGOUT */}
         <div className="absolute bottom-6 left-0 w-full px-6">
-          <button className="flex items-center justify-center gap-3 w-full bg-red-600 py-2 rounded hover:bg-red-700">
+          <button className="flex items-center justify-center gap-3 w-full bg-red-600 py-2 rounded hover:bg-red-700 cursor-pointer">
             <MdLogout />
             Logout
           </button>

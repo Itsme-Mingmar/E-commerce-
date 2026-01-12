@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom'
 
 const AdminHomePage = () => {
     const orders = [{
-        id: "12vejw34b34i",
+        _id: "12vejw34b34i",
         user: "Admin User",
         price: "Rs.54600",
         status: "Delivered"
     }, {
-        id: "12vejwi33ub4i",
+        _id: "12vejwi33ub4i",
         user: "Admin User",
         price: "Rs.54600",
         status: "Delivered"
     }, {
-        id: "12vejwi32bb3ub4i",
+        _id: "12vejwi32bb3ub4i",
         user: "Admin User",
         price: "Rs.54600",
         status: "Delivered"
     }, {
-        id: "12vejwi3bb3ub4i",
+        _id: "12vejwi3bb3ub4i",
         user: "Admin User",
         price: "Rs.54600",
         status: "Processing"
@@ -55,15 +55,16 @@ const AdminHomePage = () => {
                     <p className='basis-1/5'>TOTAL PRICE</p>
                     <p className='basis-1/5'>STATUS</p>
                 </div>
-                {
-                    orders.map((order) => 
-                        <div key={order.id} className='flex border-b border-gray-300 p-3 font-medium text-xs overflow-auto'>
-                            <p className='basis-2/5 font-semibold'>{order.id}</p>
-                            <p className='basis-1/5'>{order.user}</p>
-                            <p className='basis-1/5'>{order.price}</p>
-                            <p className='basis-1/5'>{order.status}</p>
+                { orders.length> 0 ?(
+                    orders.map((order) => (
+                        <div key={order._id} className='flex border-b border-gray-300 p-3 font-medium text-xs overflow-auto'>
+                            <p className='basis-2/5 font-semibold'>{order._id}</p>
+                            <p className='basis-1/5 text-gray-500'>{order.user}</p>
+                            <p className='basis-1/5 text-gray-500'>{order.price}</p>
+                            <p className='basis-1/5 text-gray-500'>{order.status}</p>
                         </div>
-                    )
+                    ))
+                ):( <p className='p-4'>No resent order founds</p>)
                 }
             </div>
         </div>
