@@ -4,25 +4,26 @@ import { Link } from 'react-router-dom'
 const AdminHomePage = () => {
     const orders = [{
         _id: "12vejw34b34i",
-        user: "Admin User",
-        price: "Rs.54600",
+        user: {
+            name: "Admin User"
+        },
+        totalPrice: "Rs.54600",
         status: "Delivered"
     }, {
-        _id: "12vejwi33ub4i",
-        user: "Admin User",
-        price: "Rs.54600",
+        _id: "12vejw34b34i",
+        user: {
+            name: "Admin User"
+        },
+        totalPrice: "Rs.54600",
         status: "Delivered"
     }, {
-        _id: "12vejwi32bb3ub4i",
-        user: "Admin User",
-        price: "Rs.54600",
+        _id: "12vejw34b34i",
+        user: {
+            name: "Admin User"
+        },
+        totalPrice: "Rs.54600",
         status: "Delivered"
-    }, {
-        _id: "12vejwi3bb3ub4i",
-        user: "Admin User",
-        price: "Rs.54600",
-        status: "Processing"
-    }
+    }, 
     ]
     return (
         <div className='container min-h-screen p-6 md:p-12'>
@@ -59,8 +60,8 @@ const AdminHomePage = () => {
                     orders.map((order) => (
                         <div key={order._id} className='flex border-b border-gray-300 p-3 font-medium text-xs overflow-auto'>
                             <p className='basis-2/5 font-semibold'>{order._id}</p>
-                            <p className='basis-1/5 text-gray-500'>{order.user}</p>
-                            <p className='basis-1/5 text-gray-500'>{order.price}</p>
+                            <p className='basis-1/5 text-gray-500'>{order.user.name}</p>
+                            <p className='basis-1/5 text-gray-500'>{order.totalPrice}</p>
                             <p className='basis-1/5 text-gray-500'>{order.status}</p>
                         </div>
                     ))
