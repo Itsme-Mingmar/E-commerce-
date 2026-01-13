@@ -13,7 +13,7 @@ const UserManagement = () => {
             [e.target.name]: e.target.value
         })
     }
-    const handleSubmit =()=>{
+    const handleSubmit = () => {
         // ....
     }
     return (
@@ -50,8 +50,14 @@ const UserManagement = () => {
                         className='w-full border rounded border-gray-400 p-1 mb-4'
                     />
                     <label className='text-gray-700 block' >Role</label>
+                    <select className='border border-gray-400 rounded p-1 w-full'>
+                        <option value={userData.role} onSelect={handleInput}>Admin</option>
+                        <option value={userData.role} onSelect={handleInput}>Customer</option>
+                    </select>
+                    <button type='submit' className='px-3 py-2 bg-green-600 hover:bg-green-700 rounded my-4 text-white/90 cursor-pointer'>Add User</button>
                 </form>
             </div>
+            {/* users */}
 
         </div>
     )
