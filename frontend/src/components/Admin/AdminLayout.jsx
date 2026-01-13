@@ -57,7 +57,7 @@ const AdminLayout = () => {
 
         {/* NAV LINKS */}
         <nav className="flex flex-col gap-4 px-6 py-6">
-          <Link className="flex items-center gap-3 hover:text-amber-400">
+          <Link to="/admin/user" className="flex items-center gap-3 hover:text-amber-400">
             <FaUsers /> Users
           </Link>
 

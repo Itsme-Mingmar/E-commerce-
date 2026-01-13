@@ -12,6 +12,7 @@ import Order from './pages/Order';
 import { Toaster } from 'sonner'
 import AdminLayout from './components/Admin/AdminLayout';
 import AdminHomePage from './pages/AdminHomePage';
+import UserManagement from './pages/UserManagement';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         </Route>
         <Route path='/admin' element={<AdminLayout />}>
         <Route path='/admin' element={<AdminHomePage />} />
+        <Route path='/admin/user' element={<UserManagement />} />
         {/* admin route */}
         </Route>
       </Routes>
