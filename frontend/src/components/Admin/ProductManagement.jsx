@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ProductManagement = () => {
   const Products = [
@@ -45,7 +46,7 @@ const ProductManagement = () => {
               <p className='col-span-2 text-gray-700'>{product.price}</p>
               <p className='col-span-2 text-gray-700'>{product.sku}</p>
               <div className='col-span-2 text-white/80'>
-                <button className='p-1 mr-2 sm: mb-1 px-2 rounded bg-amber-400 cursor-pointer'>Edit</button>
+                <Link to="/admin/product/edit/:{product._id}" className='p-1 mr-2 sm: mb-1 px-2 rounded bg-amber-400 cursor-pointer'>Edit</Link>
                 <button className='p-1 px-2 rounded bg-red-500 cursor-pointer'>Delete</button>
               </div>
             </div>

@@ -130,7 +130,7 @@ const Order = () => {
                         View My Orders
                     </button>
 
-                    <button onClick={()=> navigate("/collections/all")} className="w-full border-gray-400 hover:bg-gray-100 border py-2 rounded cursor-pointer">
+                    <button onClick={()=> navigate("/collections/all")} className="w-full bg-amber-400 hover:bg-amber-500 py-2 rounded cursor-pointer">
                         Continue Shopping
                     </button>
                 </div>
