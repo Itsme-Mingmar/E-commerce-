@@ -82,19 +82,17 @@ const Checkout = ({ cart }) => {
     }
   }
 
-  /* 
+  
   const handlePayment = (provider) => {
     console.log("Checkout ID:", checkoutId)
     console.log("Payment Provider:", provider)
 
-    // 🔜 later integrate real payment gateway
-    navigate(`/order-success/${checkoutId}`)
+    // ..
   }
-  */
+  
 
   return (
     <>
-      {/* 🔹 BLUR BACKGROUND WHEN PAYMENT POPUP IS OPEN */}
       <div className={`container mx-auto px-4 py-14 ${showPaymentPopup ? "blur-sm pointer-events-none" : ""}`}>
         <h1 className="text-3xl font-bold mb-10">Checkout</h1>
 
@@ -168,7 +166,7 @@ const Checkout = ({ cart }) => {
             </div>
           </div>
 
-          {/* RIGHT SIDE – ORDER SUMMARY */}
+          {/*  ORDER SUMMARY */}
           <div className="border rounded-lg p-6 h-fit">
             <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
 

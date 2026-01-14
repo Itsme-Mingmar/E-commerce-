@@ -13,6 +13,7 @@ import { Toaster } from 'sonner'
 import AdminLayout from './components/Admin/AdminLayout';
 import AdminHomePage from './pages/AdminHomePage';
 import UserManagement from './pages/UserManagement';
+import ProductManagement from './pages/ProductManagement';
 
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='/admin' element={<AdminLayout />}>
         <Route path='/admin' element={<AdminHomePage />} />
         <Route path='/admin/user' element={<UserManagement />} />
+        <Route path='/admin/product' element={<ProductManagement />} />
         {/* admin route */}
         </Route>
       </Routes>
