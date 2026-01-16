@@ -8,11 +8,7 @@ const EditProductPage = () => {
     stock: "",
     suk: "",
     category: "",
-    images: [
-      {
-        url: ""
-      }
-    ]
+    images: []
   })
   const handleInput = (e) => {
     setFormData({
@@ -20,11 +16,15 @@ const EditProductPage = () => {
       [e.target.name]: e.target.value
     })
   }
+  const submitData=(e)=>{
+    e.preventDefault();
+    //
+  }
   return (
     <div className='min-h-screen bg-gray-100 md:px-20 px-8 pt-6 pb-16'>
       <h1 className='flex justify-center font-bold text-gray-700 text-xl border-b border-gray-300 py-4 mb-6 '>Edit Product</h1>
       <div>
-        <form >
+        <form onSubmit={submitData}>
           <label className='font-medium text-gray-700 py-1' >Product Name</label>
           <input
             type="text"
@@ -39,7 +39,7 @@ const EditProductPage = () => {
             value={formData.discription}
             onChange={handleInput}
             rows={6}
-            className='w-full border border-gray-400 rounded mb-6'
+            className='input w-full border border-gray-400 rounded mb-6'
           />
           <div className='grid grid-cols-2 gap-6'>
             <div>
@@ -91,7 +91,7 @@ const EditProductPage = () => {
                 type="text"
                 name='url'
                 placeholder='Image URL'
-                value={formData.images.url}
+                value={formData.images}
                 onChange={handleInput}
                 className='w-full p-2 border border-gray-400 rounded'
               />
@@ -102,7 +102,7 @@ const EditProductPage = () => {
                 type="text"
                 name='url'
                 placeholder='Image URL'
-                value={formData.images.url}
+                value={formData.images}
                 onChange={handleInput}
                 className='w-full p-2 border border-gray-400 rounded'
               />
@@ -110,7 +110,7 @@ const EditProductPage = () => {
             </div>
           </div>
           <button className='border border-gray-400 rounded hover:bg-gray-200 w-full py-2 text-gray-700 font-medium cursor-pointer mb-6'>+ Add Image</button>
-          <button className='text-white/80 bg-amber-400 hover:bg-amber-500 rounded w-full py-2 font-medium cursor-pointer'>Update Product</button>
+          <button type='submit' className='text-white/80 bg-amber-400 hover:bg-amber-500 rounded w-full py-2 font-medium cursor-pointer'>Update Product</button>
         </form>
       </div>
     </div>

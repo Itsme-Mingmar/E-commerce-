@@ -14,7 +14,7 @@ const AdminLayout = () => {
 
   return (
     <>
-      {/* ===== MOBILE TOP BAR ===== */}
+      {/*  MOBILE BAR */}
       <div className="md:hidden flex items-center justify-between px-4 py-4 border-b bg-gray-900">
         <button onClick={() => setMenuOpen(true)}>
           <FaBars size={22} className="text-white cursor-pointer" />
@@ -22,7 +22,6 @@ const AdminLayout = () => {
         <p className="font-bold text-lg text-white">Admin Dashboard</p>
       </div>
 
-      {/* ===== OVERLAY (MOBILE ONLY) ===== */}
       {menuOpen && (
         <div
           onClick={() => setMenuOpen(false)}
@@ -30,7 +29,7 @@ const AdminLayout = () => {
         />
       )}
 
-      {/* ===== SIDEBAR ===== */}
+      {/* SIDEBAR */}
       <aside
         className={`
           fixed top-0 left-0 h-full w-64 bg-gray-900 text-white z-50
@@ -45,8 +44,6 @@ const AdminLayout = () => {
             <Link to="/" className="text-xl font-bold">NutriPulse</Link>
             <Link to="/admin" className=" block text-sm text-gray-400">Admin Panel</Link>
           </div>
-
-          {/* Close button (mobile only) */}
           <button
             onClick={() => setMenuOpen(false)}
             className="md:hidden cursor-pointer"
@@ -54,8 +51,6 @@ const AdminLayout = () => {
             <FaTimes size={20} />
           </button>
         </div>
-
-        {/* NAV LINKS */}
         <nav className="flex flex-col gap-4 px-6 py-6">
           <Link to="/admin/user" onClick={()=>setMenuOpen(false)} className="flex items-center gap-3 hover:text-amber-400">
             <FaUsers /> Users
