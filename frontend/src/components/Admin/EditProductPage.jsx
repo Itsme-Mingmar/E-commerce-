@@ -3,20 +3,20 @@ import React, { useState } from 'react'
 const EditProductPage = () => {
   const [formData, setFormData] = useState({
     name: "",
-    discription: "",
-    price: "",
-    stock: "",
-    suk: "",
+    description: "",
+    price: 0,
+    countInStock: 0,
+    sku: "",
     category: "",
-    images: []
+    images: [""]
   })
-  const handleInput = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-  const submitData=(e)=>{
+  const handleInput = ({ target: { name, value } }) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+  const submitData = (e) => {
     e.preventDefault();
     //
   }
@@ -25,21 +25,21 @@ const EditProductPage = () => {
       <h1 className='flex justify-center font-bold text-gray-700 text-xl border-b border-gray-300 py-4 mb-6 '>Edit Product</h1>
       <div>
         <form onSubmit={submitData}>
-          <label className='font-medium text-gray-700 py-1' >Product Name</label>
+          <label className='label font-medium text-gray-700 py-1' >Product Name</label>
           <input
             type="text"
             name='name'
             value={formData.name}
             onChange={handleInput}
-            className='w-full p-2 border border-gray-400 rounded mb-6 '
+            className='input w-full p-2 border border-gray-400 rounded mb-6 '
           />
           <label className='font-medium text-gray-700 py-1' >Description</label>
           <textarea
             name="description"
-            value={formData.discription}
+            value={formData.description}
             onChange={handleInput}
             rows={6}
-            className='input w-full border border-gray-400 rounded mb-6'
+            className='w-full border border-gray-400 rounded mb-6 p-2'
           />
           <div className='grid grid-cols-2 gap-6'>
             <div>
@@ -57,8 +57,8 @@ const EditProductPage = () => {
               <label className='font-medium text-gray-700 py-1' >Stock</label>
               <input
                 type="number"
-                name='stock'
-                value={formData.stock}
+                name='countInStock'
+                value={formData.countInStock}
                 onChange={handleInput}
                 className='w-full p-2 border border-gray-400 rounded mb-6 '
               />
@@ -69,15 +69,16 @@ const EditProductPage = () => {
               <label className='font-medium text-gray-700 py-1' >SUK</label>
               <input
                 type="number"
-                name='suk'
-                value={formData.suk}
+                name='sku'
+                value={formData.sku}
                 onChange={handleInput}
                 className='w-full p-2 border border-gray-400 rounded mb-6 '
               />
             </div>
             <div>
               <label className='block font-medium text-gray-700 ' >Category</label>
-              <select className='border border-gray-400 rounded p-2 '>
+              <select name='category' value={formData.category} onChange={handleInput} className='border border-gray-400 rounded p-2 '>
+                <option value="">Select</option>
                 <option value="protein">Protein</option>
                 <option value="pre-workout & performance">Pre-Workout & Performance</option>
                 <option value="vitamins & wellness">Vitamins & Wellness</option>
@@ -89,7 +90,7 @@ const EditProductPage = () => {
             <div className='flex gap-4 mb-6'>
               <input
                 type="text"
-                name='url'
+                name='images'
                 placeholder='Image URL'
                 value={formData.images}
                 onChange={handleInput}
