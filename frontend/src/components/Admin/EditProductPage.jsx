@@ -16,6 +16,9 @@ const EditProductPage = () => {
       [name]: value
     }));
   };
+  const addImage = () => {
+    setFormData({ ...formData, images: [...formData.images, ""] });
+  };
   const submitData = (e) => {
     e.preventDefault();
     //
@@ -110,7 +113,7 @@ const EditProductPage = () => {
               <button className='bg-red-600 rounded text-white/90 px-3 cursor-pointer'>X</button>
             </div>
           </div>
-          <button className='border border-gray-400 rounded hover:bg-gray-200 w-full py-2 text-gray-700 font-medium cursor-pointer mb-6'>+ Add Image</button>
+          <button onClick={addImage} className='border border-gray-400 rounded hover:bg-gray-200 w-full py-2 text-gray-700 font-medium cursor-pointer mb-6'>+ Add Image</button>
           <button type='submit' className='text-white/80 bg-amber-400 hover:bg-amber-500 rounded w-full py-2 font-medium cursor-pointer'>Update Product</button>
         </form>
       </div>
