@@ -15,6 +15,7 @@ import AdminHomePage from './components/Admin/AdminHomePage';
 import UserManagement from './components/Admin/UserManagement';
 import ProductManagement from './components/Admin/ProductManagement';
 import EditProductPage from './components/Admin/EditProductPage';
+import OrdersManagement from './components/Admin/OrdersManagement';
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/admin' element={<AdminHomePage />} />
         <Route path='/admin/user' element={<UserManagement />} />
         <Route path='/admin/product' element={<ProductManagement />} />
+        <Route path='/admin/orders' element={<OrdersManagement />} />
         <Route path='/admin/product/edit/:id' element={<EditProductPage />} />
         {/* admin route */}
         </Route>

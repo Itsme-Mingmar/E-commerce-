@@ -60,7 +60,7 @@ const AdminLayout = () => {
             <AiOutlineProduct /> Products
           </Link>
 
-          <Link className="flex items-center gap-3 hover:text-amber-400">
+          <Link to="/admin/orders" className="flex items-center gap-3 hover:text-amber-400">
             <BsBorderStyle /> Orders
           </Link>
 
