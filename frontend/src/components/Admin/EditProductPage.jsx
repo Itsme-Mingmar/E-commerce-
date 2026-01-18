@@ -8,7 +8,14 @@ const EditProductPage = () => {
     countInStock: 0,
     sku: "",
     category: "",
-    images: [""]
+    images: [
+      {
+        url: "https://picsum.photos/100?1"
+      },
+      {
+        url: "https://picsum.photos/100?2"
+      }
+    ]
   })
   const handleInput = ({ target: { name, value } }) => {
     setFormData((prev) => ({
@@ -16,11 +23,14 @@ const EditProductPage = () => {
       [name]: value
     }));
   };
-  const addImage = () => {
-    setFormData({ ...formData, images: [...formData.images, ""] });
+  const handleAddImage = async (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+    //
   };
   const submitData = (e) => {
     e.preventDefault();
+    console.log(formData);
     //
   }
   return (
@@ -89,31 +99,29 @@ const EditProductPage = () => {
             </div>
           </div>
           <p className='font-medium text-gray-700 mb-1'>Images</p>
-          <div className='border-2 border-gray-300 px-3 py-3 rounded mb-4'>
-            <div className='flex gap-4 mb-6'>
-              <input
-                type="text"
-                name='images'
-                placeholder='Image URL'
-                value={formData.images}
-                onChange={handleInput}
-                className='w-full p-2 border border-gray-400 rounded'
-              />
-              <button className='bg-red-600 rounded text-white/90 px-3 cursor-pointer'>X</button>
-            </div>
-            <div className='flex gap-4 '>
-              <input
-                type="text"
-                name='url'
-                placeholder='Image URL'
-                value={formData.images}
-                onChange={handleInput}
-                className='w-full p-2 border border-gray-400 rounded'
-              />
-              <button className='bg-red-600 rounded text-white/90 px-3 cursor-pointer'>X</button>
-            </div>
+          <div className=' border border-gray-400 px-3 py-3 rounded mb-4'>
+            {
+              formData.images.map((image, index) => {
+                return (
+                  <div key={index} className='flex gap-4 mb-6 items-center'>
+                    <img
+                      src={image.url}
+                      alt={'Product Items'}
+                      className='h-20 w-20 rounded'
+                    />
+                    <label className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer">
+                      Choose Image
+                      <input
+                        type="file"
+                        onChange={handleAddImage}
+                        className='hidden'
+                      />
+                    </label>
+                  </div>
+                )
+              })
+            }
           </div>
-          <button onClick={addImage} className='border border-gray-400 rounded hover:bg-gray-200 w-full py-2 text-gray-700 font-medium cursor-pointer mb-6'>+ Add Image</button>
           <button type='submit' className='text-white/80 bg-amber-400 hover:bg-amber-500 rounded w-full py-2 font-medium cursor-pointer'>Update Product</button>
         </form>
       </div>
