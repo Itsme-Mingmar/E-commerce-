@@ -75,20 +75,25 @@ function Header() {
       {mobileMenuOpen && (
         <div className="fixed z-40 top-20 left-0 h-full w-3/4 md:hidden bg-gray-800 text-white px-6 py-4 space-y-4">
           <h3 className="font-bold py-3 border-b border-gray-600">Menu</h3>
-          <Link
-            to="/"
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false)
+              scrollToSection("new-arrival")
+            }
+            }
             className="block hover:text-gray-400"
-            onClick={() => setMobileMenuOpen(false)}
           >
             New Arrival
-          </Link>
-          <Link
-            to="/"
+          </button>
+          <button
             className="block hover:text-gray-400"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false)
+              scrollToSection("best-seller");
+            }}
           >
             Best Seller
-          </Link>
+          </button>
         </div>
       )}
     </>

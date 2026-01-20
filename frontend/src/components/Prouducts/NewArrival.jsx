@@ -148,11 +148,11 @@ const NewArrival = () => {
         <section className='py-10 px-10 mb-10'>
             <div className='container mx-auto text-center relative'>
                 <h2 className="text-3xl font-bold mb-4">Explore New Arrival</h2>
-                <p className="text-lg uppercase tracking-wider text-gray-600 mb-8">
+                <p className="text-lg uppercase tracking-wider text-gray-600 mb-12">
                     Fresh drops for your fitness journey
                 </p>
                 {/* Scroll Buttons */}
-                <div className="absolute right-4 bottom-[-30px] flex space-x-2 my-3">
+                <div className="absolute right-4 bottom-[-50px] flex space-x-2 my-3">
                     <button
                         onClick={scrollLeftHandler}
                         className={`p-2 rounded border ${scrollLeft

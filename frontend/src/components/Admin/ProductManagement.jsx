@@ -7,7 +7,7 @@ const ProductManagement = () => {
       _id: "1",
       name: "Printed Resort Shirt",
       price: 29.99,
-      sku: "PRNT-RES-004",
+      sku: "PRNT-004",
     },
     {
       _id: "2",
@@ -23,7 +23,7 @@ const ProductManagement = () => {
     }
   ]
   return (
-    <div className='min-h-screen w-full p-6 md:p-12 bg-gray-100'>
+    <div className='min-h-screen w-full p-4 md:p-12 bg-gray-100'>
       <h1 className='font-bold text-xl pb-6'>Product Management</h1>
       <div className='bg-gray-300 grid grid-cols-9 p-1 rounded font-medium'>
         <p className='col-span-3'>NAME</p>
@@ -45,8 +45,8 @@ const ProductManagement = () => {
               <p className='col-span-3'>{product.name}</p>
               <p className='col-span-2 text-gray-700'>{product.price}</p>
               <p className='col-span-2 text-gray-700'>{product.sku}</p>
-              <div className='col-span-2 text-white/80'>
-                <Link to="/admin/product/edit/:{product._id}" className=' p-1 mr-2 px-2 rounded bg-amber-400 cursor-pointer'>Edit</Link>
+              <div className='col-span-2 text-white/80 flex justify-around'>
+                <Link to="/admin/product/edit/:{product._id}" className=' p-1 px-2 rounded bg-amber-400 cursor-pointer'>Edit</Link>
                 <button className='p-1 px-2 rounded bg-red-500 cursor-pointer'>Delete</button>
               </div>
             </div>
