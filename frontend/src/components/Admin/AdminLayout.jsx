@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 import {
   FaUsers,
   FaBars,
@@ -52,22 +52,51 @@ const AdminLayout = () => {
           </button>
         </div>
         <nav className="flex flex-col gap-4 px-6 py-6">
-          <Link to="/admin/user" onClick={()=>setMenuOpen(false)} className="flex items-center gap-3 hover:text-amber-400">
+          <NavLink
+            to="/admin/user"
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 transition-colors
+       ${isActive ? "text-amber-400 font-semibold" : "hover:text-amber-400"}`
+            }
+          >
             <FaUsers /> Users
-          </Link>
+          </NavLink>
 
-          <Link to="/admin/product" onClick={()=> setMenuOpen(false)} className="flex items-center gap-3 hover:text-amber-400">
+          <NavLink
+            to="/admin/product"
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 transition-colors
+       ${isActive ? "text-amber-400 font-semibold" : "hover:text-amber-400"}`
+            }
+          >
             <AiOutlineProduct /> Products
-          </Link>
+          </NavLink>
 
-          <Link to="/admin/orders" className="flex items-center gap-3 hover:text-amber-400">
+          <NavLink
+            to="/admin/orders"
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 transition-colors
+       ${isActive ? "text-amber-400 font-semibold" : "hover:text-amber-400"}`
+            }
+          >
             <BsBorderStyle /> Orders
-          </Link>
+          </NavLink>
 
-          <Link className="flex items-center gap-3 hover:text-amber-400">
+          <NavLink
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              `flex items-center gap-3 transition-colors
+       ${isActive ? "text-amber-400 font-semibold" : "hover:text-amber-400"}`
+            }
+          >
             <AiTwotoneShop /> Shop
-          </Link>
+          </NavLink>
         </nav>
+
 
         {/* LOGOUT */}
         <div className="absolute bottom-6 left-0 w-full px-6">
