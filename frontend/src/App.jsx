@@ -16,35 +16,37 @@ import UserManagement from './components/Admin/UserManagement';
 import ProductManagement from './components/Admin/ProductManagement';
 import EditProductPage from './components/Admin/EditProductPage';
 import OrdersManagement from './components/Admin/OrdersManagement';
-
-
+import { Provider } from "react-redux"
+import store from "./redux/store"
 
 
 function App() {
   return (
-    <BrowserRouter>
-    <Toaster position='top-right' />
-      <Routes>
-        <Route path='/' element={<UserLayout />}>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/checkout' element={<Checkout />} />
-          <Route path='/order/:id' element={<Order />} />
-          <Route path='/collections/:collection' element={<Collections />} />
-          <Route path='/product/:id' element={<ProductDetails />} />
-        </Route>
-        <Route path='/admin' element={<AdminLayout />}>
-        <Route path='/admin' element={<AdminHomePage />} />
-        <Route path='/admin/user' element={<UserManagement />} />
-        <Route path='/admin/product' element={<ProductManagement />} />
-        <Route path='/admin/orders' element={<OrdersManagement />} />
-        <Route path='/admin/product/edit/:id' element={<EditProductPage />} />
-        {/* admin route */}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Toaster position='top-right' />
+        <Routes>
+          <Route path='/' element={<UserLayout />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/checkout' element={<Checkout />} />
+            <Route path='/order/:id' element={<Order />} />
+            <Route path='/collections/:collection' element={<Collections />} />
+            <Route path='/product/:id' element={<ProductDetails />} />
+          </Route>
+          <Route path='/admin' element={<AdminLayout />}>
+            <Route path='/admin' element={<AdminHomePage />} />
+            <Route path='/admin/user' element={<UserManagement />} />
+            <Route path='/admin/product' element={<ProductManagement />} />
+            <Route path='/admin/orders' element={<OrdersManagement />} />
+            <Route path='/admin/product/edit/:id' element={<EditProductPage />} />
+            {/* admin route */}
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   )
 }
 export default App
