@@ -96,5 +96,5 @@ const authSlice = createSlice({
         })
     }
 });
-export { logout, generateNewGuestId } = authSlice.actions;
+export const { logout, generateNewGuestId } = authSlice.actions;
 export default authSlice.reducer;
