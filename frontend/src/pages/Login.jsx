@@ -21,7 +21,10 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(loginUser({formData}));
+    dispatch(loginUser({
+      email:formData.email,
+      password: formData.password,
+    }));
   }
 
   return (

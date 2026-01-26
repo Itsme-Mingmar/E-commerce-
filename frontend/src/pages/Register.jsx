@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { registerUser } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +11,7 @@ const Register = () => {
     password: "",
     confirmPassword: ""
   })
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -23,8 +27,11 @@ const Register = () => {
       alert("Passwords do not match")
       return
     }
-    console.log("Register Data:", formData)
-    // 🔗 API call later
+    dispatch(registerUser({
+      name:formData.name,
+      email:formData.email,
+      password:formData.password,
+    }))
   }
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
