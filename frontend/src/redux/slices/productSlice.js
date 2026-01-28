@@ -29,3 +29,30 @@ export const fetchProductDetails = createAsyncThunk(
         return response.data;
     }
 );
+// async thunk to fetch  products 
+export const updateProduct = createAsyncThunk(
+    "products/updateProduct",
+    async({id, productData}) => {
+        const response = await axios.put(
+            `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`, productData,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+                },
+            }
+        );
+        return response.data;
+    }
+)
+
+// async thunk to fetch similar products 
+export const fetchSimilarProducts = createAsyncThunk(
+    "products/fetchSimilarProducts",
+    async({id}) => {
+        const response = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`
+        );
+        return response.data;
+    }
+);
+

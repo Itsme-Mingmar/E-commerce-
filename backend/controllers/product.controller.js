@@ -44,6 +44,7 @@ const productRegister = asyncHandler(async(req, res,)=>{
     );
 
 });
+
 const productUpdate = asyncHandler(async(req, res)=>{
   const {id} = req.params;
   const updates = req.body;
