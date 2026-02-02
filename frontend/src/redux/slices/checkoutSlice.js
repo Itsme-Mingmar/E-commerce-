@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
 export const createCheckout = createAsyncThunk(
@@ -38,7 +38,7 @@ const checkoutSlice = createSlice({
                 state.loading = false;
                 state.checkout = action.payload;
             })
-            .addCase(checkoutSlice.pending, (state, action) => {
+            .addCase(checkoutSlice.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload.message;
             });
