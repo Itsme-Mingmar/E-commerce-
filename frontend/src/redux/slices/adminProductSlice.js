@@ -49,4 +49,21 @@ export const updateProducts = createAsyncThunk(
             return rejectWithValue(error.response.message)
         }
     }
+);
+//async thunk to delete a product 
+export const deleteProduct = createAsyncThunk(
+    "adminProduct/deleteProduct",
+    async(id, {rejectWithValue})=>{
+        try {
+            await axios.delete(
+                `${API_URL}/api/admin/products/${id}`,
+                {
+                    withCredentials: true,
+                }
+            )
+            return id;
+        } catch (error) {
+            return rejectWithValue(error.response.message)
+        }
+    }
 )
