@@ -9,9 +9,7 @@ const fetchUserOrder = createAsyncThunk(
             const response = await axios.get(
                 `${import.meta.env.VITE_BACKEND_URL}/api/orders/my-orders`,
                 {
-                    headers: {
-                        //authorization
-                    },
+                    withCredentials: true,
                 }
             );
             return response.data;
@@ -28,8 +26,8 @@ export const fetchOrderDetails = createAsyncThunk(
             const response = await axios.get(
                 `${import.meta.env.VITE_BACKEND_URL}/api/orders/${orderId}`,
                 {
-                    //authorization
-                },
+                    withCredentials: true,
+                }
             );
             return response.data;
         } catch (error) {

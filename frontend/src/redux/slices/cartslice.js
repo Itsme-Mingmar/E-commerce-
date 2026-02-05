@@ -99,11 +99,9 @@ export const mergeCart = createAsyncThunk(
             const response = axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`,
                 { guestId, userId },
-                // {
-                //     headers: {
-                //         Authorization: //take userToken through cookies
-                //     }
-                // }
+                {
+                    withCredentials: true,
+                }
             )
             return (await response).data;
         } catch (error) {

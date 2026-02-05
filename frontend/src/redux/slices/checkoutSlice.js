@@ -8,10 +8,9 @@ export const createCheckout = createAsyncThunk(
             const response = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/api/checkout`,
                 checkoutdata,
-                //  {
-
-                //     authorization
-                // }
+                {
+                    withCredentials: true,
+                }
             )
             return response.data;
         } catch (error) {
