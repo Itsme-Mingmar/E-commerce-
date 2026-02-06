@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, { Axios } from "axios";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
@@ -67,3 +67,45 @@ export const deleteProduct = createAsyncThunk(
         }
     }
 )
+const adminProductSlice = createSlice({
+    name: "adminProducts",
+    initialState: {
+        products: [],
+        loading: false,
+        error: null,
+    },
+    reducers: {},
+    extraReducers: (builder)=> {
+        builder
+        .addCase(fetchAdminProducts.pending, (state)=>{
+            state.loading = true;
+        })
+        .addCase(fetchAdminProducts.fulfilled, (state, action)=>{
+            state.loading = false;
+            state.products = action.payload;
+        })
+        .addCase(fetchAdminProducts.rejected, (state, action)=>{
+            state.loading = false;
+            state.error = action.error.message;
+        })
+        .addCase(createProducts.fulfilled, (state,action)=>{
+            state.products.push(action.payload);
+        })
+        .addCase(updateProducts.fulfilled, (state, action)=>{
+            const index = state.products.findIndex(
+                (product) => product._id === action.payload._id
+            );
+            if(index !== -1) {
+                state.products[index] = action.payload;
+            }
+        })
+        .addCase(deleteProduct.fulfilled,(state, action)=> {
+            state.products = state.products.filter(
+                (product)=> product._id !== action.payload
+            )
+        } )
+
+        
+    }
+});
+export default adminProductSlice.reducer;
