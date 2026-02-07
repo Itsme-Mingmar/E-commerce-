@@ -1,6 +1,5 @@
-import { __DO_NOT_USE__ActionTypes, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
 
 export const fetchAllOrders = createAsyncThunk(
     "adminOrders/fetchAllOrders",
