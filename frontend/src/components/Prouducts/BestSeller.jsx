@@ -1,64 +1,23 @@
+import { useEffect, useState } from "react"
 import ProductCard from "./ProductCard"
+import axios from "axios";
 
 const BestSeller = () => {
-  const bestSellers = [
-    {
-      _id: "1",
-      name: "Whey Protein",
-      price: 4500,
-      category: "Protein",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?1" }]
-    },
-    {
-      _id: "1",
-      name: "Whey Protein",
-      price: 4500,
-      category: "Protein",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?1" }]
-    },
-    {
-      _id: "1",
-      name: "Whey Protein",
-      price: 4500,
-      category: "Protein",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?1" }]
-    },
-    {
-      _id: "1",
-      name: "Whey Protein",
-      price: 4500,
-      category: "Protein",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?1" }]
-    },
-    {
-      _id: "1",
-      name: "Whey Protein",
-      price: 4500,
-      category: "Protein",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?1" }]
-    },
-    {
-      _id: "2",
-      name: "Creatine Monohydrate",
-      price: 2800,
-      category: "Performance",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?2" }]
-    },
-    {
-      _id: "3",
-      name: "BCAA Energy",
-      price: 3200,
-      category: "Recovery",
-      isBestSeller: true,
-      images: [{ URL: "https://picsum.photos/400?3" }]
+ const [bestSellers, setBestSellers] = useState([]);
+
+ useEffect(()=>{
+  const fetchbestSeller = async()=>{
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/getBestSeller`
+      );
+      setBestSellers(response?.data?.data);
+    } catch (error) {
+      console.log(error);
     }
-  ]
+  }
+  fetchbestSeller()
+ }, [])
 
   return (
     <section className=" pb-10 bg-gray-50">
