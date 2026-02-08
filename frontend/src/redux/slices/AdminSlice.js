@@ -115,9 +115,9 @@ const adminSlice = createSlice({
                 state.loading = false;
                 state.error = null;
             })
-            .addCase(fetchUsers.rejected, (state, action) => {
+            .addCase(addUser.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message;
+                state.error = action.payload;
             })
     }
 

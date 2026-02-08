@@ -19,7 +19,7 @@ export const fetchAllOrders = createAsyncThunk(
 )
 // update order delivery status
 export const updateOrdersStatus = createAsyncThunk(
-    "adminOrders/fetchAllOrders",
+    "adminOrders/updateOrders",
     async ({ id, status }, { rejectWithValue }) => {
         try {
             const response = await axios.put(
@@ -37,7 +37,7 @@ export const updateOrdersStatus = createAsyncThunk(
 
 // delete an orders
 export const deleteOrder = createAsyncThunk(
-    "adminOrders/fetchAllOrders",
+    "adminOrders/deleteOrders",
     async (id, { rejectWithValue }) => {
         try {
             await axios.delete(
@@ -81,7 +81,7 @@ const adminOrderSlice = createSlice({
             })
             .addCase(fetchAllOrders.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message;
+                state.error = action.payload;
             })
 
             //update status

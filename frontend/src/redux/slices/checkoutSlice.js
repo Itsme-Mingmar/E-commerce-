@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const createCheckout = createAsyncThunk(
     "checkout/createCheckout",
-    async (checkoutdata, { isRejectedWithValue }) => {
+    async (checkoutdata, { rejectedWithValue }) => {
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/api/checkout`,
@@ -14,7 +14,7 @@ export const createCheckout = createAsyncThunk(
             )
             return response.data;
         } catch (error) {
-            return isRejectedWithValue(error.response.data);
+            return rejectedWithValue(error.response.data);
         }
     }
 );
@@ -29,17 +29,17 @@ const checkoutSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(checkoutSlice.pending, (state) => {
+            .addCase(createCheckout.pending, (state) => {
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(checkoutSlice.fulfilled, (state, action) => {
+            .addCase(createCheckout.fulfilled, (state, action) => {
                 state.loading = false;
                 state.checkout = action.payload;
             })
-            .addCase(checkoutSlice.rejected, (state, action) => {
+            .addCase(createCheckout.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload.message;
+                state.error = action.payload;
             });
     },
 });

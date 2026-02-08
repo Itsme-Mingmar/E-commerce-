@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const initialState = {
-    cart: loadCartFromStorage(),
-    loading: false,
-    error: null,
-}
 
 //fuction to load cart from localstorage
 const loadCartFromStorage = () => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : { products: [] };
+}
+
+const initialState = {
+    cart: loadCartFromStorage(),
+    loading: false,
+    error: null,
 }
 // function to save cart to localStorage
 const SaveCartTOStorage = (cart) => {
