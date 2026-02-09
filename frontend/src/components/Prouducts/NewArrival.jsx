@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
@@ -10,86 +11,21 @@ const NewArrival = () => {
     const [scrollLeft, setScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
 
-    const newArrivals = [
-        {
-            productId: 1,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/500/500?/random=1",
-                    altText: "Protein"
-                }
-            ]
-        },
-        {
-            productId: 2,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/500/500?/random=2",
-                    altText: "Protein"
-                }
-            ]
-        },
-        {
-            productId: 3,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/500/500?/random=3",
-                    altText: "Protein"
-                }
-            ]
-        },
-        {
-            productId: 4,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/500/500?/random=4",
-                    altText: "Protein"
-                }
-            ]
-        },
-        {
-            productId: 5,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/500/500?/random=5",
-                    altText: "Protein"
-                }
-            ]
-        },
-        {
-            productId: 6,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/500/500?/random=6",
-                    altText: "Protein"
-                }
-            ]
-        },
-        {
-            productId: 7,
-            name: "Protein",
-            price: 5000,
-            images: [
-                {
-                    URL: "https://picsum.photos/700/700?/random=7",
-                    altText: "Protein"
-                }
-            ]
-        },
-    ]
+    const [newArrivals, setnewArrivals] = useState([]);
 
+    useEffect(() => {
+        const fetchNewArrivals = async () => {
+            try {
+                const response = await axios.get(
+                    `${import.meta.env.VITE_BACKEND_URL}/api/getNewArrivals`
+                );
+                setnewArrivals(response?.data?.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchNewArrivals()
+    }, [])
     const updateScrollButtons = () => {
         const container = scrollRef.current
 
