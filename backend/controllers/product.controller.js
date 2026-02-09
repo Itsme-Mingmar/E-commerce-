@@ -155,5 +155,16 @@ const bestSeller = asyncHandler(async (req, res) => {
   );
 });
 //new-arrival..?>.
+const newArrival = asyncHandler(async (req, res) => {
+
+  const products = await Product.find({
+    tags: "New Arrival",
+  }).limit(8);
+
+  res.status(200).json(
+    new apiResponse(200, products, "New arrival products fetched successfully")
+  );
+});
+
 //dynamic rout for single product : 9:15
-export { productRegister, productUpdate, productDelete, filterProduct, productDetails, similarProducts, uploadImage, getAllProducts,bestSeller };
+export { productRegister, productUpdate, productDelete, filterProduct, productDetails, similarProducts, uploadImage, getAllProducts,bestSeller, newArrival };
