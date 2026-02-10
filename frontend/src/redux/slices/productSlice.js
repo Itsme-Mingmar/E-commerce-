@@ -10,7 +10,7 @@ export const fetchProductByFilter = createAsyncThunk(
         if (tag) query.append("tag", tag);
 
         const response = await axios.get(
-            `${import.meta.VITE_BACKEND_URL}/api/products?${query.toString()}`
+            `${import.meta.VITE_BACKEND_URL}/api/products/${query.toString()}`
         );
         return response.data;
 
@@ -21,7 +21,7 @@ export const fetchProductDetails = createAsyncThunk(
     "product/fetchProductDetails",
     async (id) => {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products?${id}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/productDetails/${id}`
         )
         return response.data;
     }
