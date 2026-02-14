@@ -4,13 +4,13 @@ import axios from "axios";
 //Async thuck for Fetch products by filters
 export const fetchProductByFilter = createAsyncThunk(
     "products/fetchByFilters",
-    async ({category,tag,}) => {
+    async ({ category, tag, }) => {
         const query = new URLSearchParams();
         if (category) query.append("category", category);
         if (tag) query.append("tag", tag);
 
         const response = await axios.get(
-            `${import.meta.VITE_BACKEND_URL}/api/products/${query.toString()}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/products/${query.toString()}`
         );
         return response.data;
 
@@ -43,9 +43,9 @@ export const updateProduct = createAsyncThunk(
 // async thunk to fetch similar products 
 export const fetchSimilarProducts = createAsyncThunk(
     "products/fetchSimilarProducts",
-    async ({ id }) => {
+    async (id) => {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/similarProducts/${id}`
         );
         return response.data;
     }
@@ -57,6 +57,8 @@ const productsSlice = createSlice({
         products: [],
         selectedProduct: null,
         similarProducts: [],
+        productLoading: false,
+        similarLoading: false,
         loading: false,
         error: null,
         filters: {
@@ -91,16 +93,16 @@ const productsSlice = createSlice({
             })
             //handle fetch single product details
             .addCase(fetchProductDetails.pending, (state) => {
-                state.loading = true,
+                state.productLoading = true,
                     state.error = null
             })
             .addCase(fetchProductDetails.fulfilled, (state, action) => {
-                state.loading = false;
-                state.selectedProduct = action.payload;
+                state.productLoading = false;
+                state.selectedProduct = action.payload.data;
             })
             .addCase(fetchProductDetails.rejected, (state, action) => {
-                state.loading = false
-                state.error - action.error.message;
+                state.productLoading = false
+                state.error = action.error.message;
             })
             //handle upadating product
             .addCase(updateProduct.pending, (state) => {
@@ -119,20 +121,20 @@ const productsSlice = createSlice({
             })
             .addCase(updateProduct.rejected, (state, action) => {
                 state.loading = false
-                state.error - action.error.message;
+                state.error = action.error.message;
             })
             // similar products 
             .addCase(fetchSimilarProducts.pending, (state) => {
-                state.loading = true,
+                state.similarLoading = true,
                     state.error = null
             })
             .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
-                state.loading = false;
-                state.products = action.payload;
+                state.similarLoading = false;
+                state.similarProducts = action.payload.data;
             })
             .addCase(fetchSimilarProducts.rejected, (state, action) => {
-                state.loading = false
-                state.error - action.error.message;
+                state.similarLoading = false
+                state.error = action.error.message;
             })
     }
 })

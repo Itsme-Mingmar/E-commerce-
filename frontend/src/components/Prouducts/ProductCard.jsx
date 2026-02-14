@@ -7,7 +7,7 @@ const ProductCard = ({ product }) => {
       {/* Image */}
       <div className="relative">
         <img
-          src={product.images[0]?.URL}
+          src={product.images[0]?.url}
           alt={product.name}
           className="w-full h-64 object-cover group-hover:scale-105 transition duration-300"
         />

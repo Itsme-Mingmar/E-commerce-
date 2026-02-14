@@ -117,9 +117,11 @@ const NewArrival = () => {
                 onMouseUp={handleMouseUp}
                 onMouseMove={handleMouseMove} className='container mx-auto overflow-x-scroll flex space-x-6 relative'>
                 {newArrivals.map((product) => (
-                    <div key={product._id} className='min-w-[100%] sm:min-w-[30%] relative'>
+                    <div key={product._id} className='min-w-full sm:min-w-[30%] relative'>
                         <img
-                            src={product.images[0]?.URL}
+                            src={product.images && product.images.length > 0
+                                ? product.images[0].url
+                                : "/placeholder.png"}
                             alt={product.name}
                             className='w-full object-cover lg:h-[500px] rounded-lg h-[400px]'
                             draggable='false'

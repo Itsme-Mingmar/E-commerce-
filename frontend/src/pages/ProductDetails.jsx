@@ -22,7 +22,7 @@ const ProductDetails = () => {
   // Set first image after product loads
   useEffect(() => {
     if (selectedProduct?.images?.length > 0) {
-      setActiveImage(selectedProduct.images[0].URL);
+      setActiveImage(selectedProduct.images[0].url);
     }
   }, [selectedProduct]);
 
@@ -56,11 +56,11 @@ const ProductDetails = () => {
             {selectedProduct.images?.map((img, index) => (
               <img
                 key={index}
-                src={img.URL}
+                src={img.url}
                 alt="thumbnail"
-                onClick={() => setActiveImage(img.URL)}
+                onClick={() => setActiveImage(img.url)}
                 className={`w-16 h-20 object-cover rounded cursor-pointer border 
-                ${activeImage === img.URL
+                ${activeImage === img.url
                     ? "border-black"
                     : "border-gray-300"}`}
               />
@@ -118,7 +118,9 @@ const ProductDetails = () => {
 
       {/* Similar Products */}
       <div className="mt-16">
-        <SimilarProducts category={selectedProduct.category} />
+        {selectedProduct?._id && (
+          <SimilarProducts id={id} />
+        )}
       </div>
     </div>
   );
