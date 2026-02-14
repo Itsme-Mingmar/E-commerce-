@@ -3,6 +3,7 @@ import Product from "../models/products.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import apiError from "../utils/apiError.js";
 import apiResponse from "../utils/apiResponse.js";
+import mongoose from "mongoose";
 
 const productRegister = asyncHandler(async (req, res,) => {
   const user = req.user?._id;
@@ -113,6 +114,9 @@ const productDetails = asyncHandler(async (req, res) => {
 });
 const similarProducts = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: "Invalid product ID" });
+  }
   if (!id) {
     throw new apiError(400, "Product id required");
   }
@@ -167,4 +171,4 @@ const newArrival = asyncHandler(async (req, res) => {
 });
 
 //dynamic rout for single product : 9:15
-export { productRegister, productUpdate, productDelete, filterProduct, productDetails, similarProducts, uploadImage, getAllProducts,bestSeller, newArrival };
+export { productRegister, productUpdate, productDelete, filterProduct, productDetails, similarProducts, uploadImage, getAllProducts, bestSeller, newArrival };

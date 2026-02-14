@@ -10,7 +10,7 @@ productRouter.put("/productUpdate/:id", jwtVerify, roleVerify, productUpdate);
 productRouter.delete("/productDelete/:id",jwtVerify, roleVerify, productDelete);
 productRouter.get("/filterProducts", jwtVerify, filterProduct);
 productRouter.get("/productDetails/:id", productDetails);  // add later jwtVerify
-productRouter.get("/similarProducts/:id",jwtVerify, similarProducts);
+productRouter.get("/similarProducts/:id", similarProducts); // add later jwtVerify
 productRouter.post("/uploadImage", jwtVerify, roleVerify, upload.single("image"), uploadImage);
 productRouter.get("/getAllProducts", jwtVerify, roleVerify, getAllProducts);
 productRouter.get("/getBestSeller", bestSeller); //  add jwt 
