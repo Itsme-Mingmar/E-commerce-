@@ -3,6 +3,10 @@ import ProductCard from "../components/Prouducts/ProductCard"
 import ProductFilter from "../components/Common/ProductFilter"
 import { FiFilter } from "react-icons/fi"
 import { IoMdClose } from "react-icons/io"
+import { fetchAllProducts, fetchProductByFilter } from "../redux/slices/productSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+
 
 const Collection = () => {
   const [filters, setFilters] = useState({
@@ -11,40 +15,36 @@ const Collection = () => {
   })
 
   const [isFilterOpen, setIsFilterOpen] = useState(false)
+  const dispatch = useDispatch();
 
-  const products = [
-    {
-      _id: "1",
-      name: "Whey Protein",
-      price: 4500,
-      images: [{ URL: "https://picsum.photos/300" }]
-    },
-    {
-      _id: "2",
-      name: "Whey Protein",
-      price: 4500,
-      images: [{ URL: "https://picsum.photos/300" }]
-    },
-    {
-      _id: "3",
-      name: "Whey Protein",
-      price: 4500,
-      images: [{ URL: "https://picsum.photos/300" }]
-    },
-    {
-      _id: "4",
-      name: "Whey Protein",
-      price: 4500,
-      images: [{ URL: "https://picsum.photos/300" }]
-    },
-    {
-      _id: "5",
-      name: "Whey Protein",
-      price: 4500,
-      images: [{ URL: "https://picsum.photos/300" }]
-    },
-  ]
+  const { products, loading, error } = useSelector(
+    (state) => state.products
+  );
 
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+
+    if (filters.category || filters.tags) {
+
+      dispatch(fetchProductByFilter(filters));
+
+    } else {
+
+      dispatch(fetchAllProducts());
+
+    }
+
+  }, [filters, dispatch]);
+  if (loading) return <p>Loading similar products...</p>;
+  if (error)
+    return (
+      <div className="text-center py-20 text-red-500">
+        Error: {error}
+      </div>
+    );
   return (
     <div className="container mx-auto px-6 py-16">
 

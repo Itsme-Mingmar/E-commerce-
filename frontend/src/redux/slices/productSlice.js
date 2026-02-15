@@ -18,16 +18,14 @@ export const fetchAllProducts = createAsyncThunk(
 //Async thuck for Fetch products by filters
 export const fetchProductByFilter = createAsyncThunk(
     "products/fetchByFilters",
-    async ({ category, tag, }) => {
+    async ({ category, tags, }) => {
         const query = new URLSearchParams();
         if (category) query.append("category", category);
-        if (tag) query.append("tag", tag);
-
+        if (tags) query.append("tags", tags);
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/filterProducts?${query.toString()}`
         );
         return response.data.data;
-
     }
 )
 // async thunk to fetch single product by ID
@@ -100,6 +98,7 @@ const productsSlice = createSlice({
 
             .addCase(fetchAllProducts.fulfilled, (state, action) => {
                 state.loading = false;
+                console.log("PAYLOAD:", action.payload);
                 state.products = action.payload;
             })
 
