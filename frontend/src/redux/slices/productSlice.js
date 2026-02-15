@@ -1,6 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// async thunk for all products 
+export const fetchAllProducts = createAsyncThunk(
+    "products/fetchAll",
+    async () => {
+        const response = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/api/getAllProducts`,
+            {
+                withCredentials: true,
+            }
+        );
+        return response.data.data;
+    }
+);
+
 //Async thuck for Fetch products by filters
 export const fetchProductByFilter = createAsyncThunk(
     "products/fetchByFilters",
@@ -10,9 +24,9 @@ export const fetchProductByFilter = createAsyncThunk(
         if (tag) query.append("tag", tag);
 
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products/${query.toString()}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/products?${query.toString()}`
         );
-        return response.data;
+        return response.data.data;
 
     }
 )
@@ -79,6 +93,20 @@ const productsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            .addCase(fetchAllProducts.pending, (state) => {
+                state.loading = true;
+            })
+
+            .addCase(fetchAllProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.products = action.payload;
+            })
+
+            .addCase(fetchAllProducts.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
             .addCase(fetchProductByFilter.pending, (state) => {
                 state.loading = true,
                     state.error = null
