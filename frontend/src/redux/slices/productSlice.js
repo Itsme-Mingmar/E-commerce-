@@ -18,10 +18,12 @@ export const fetchAllProducts = createAsyncThunk(
 //Async thuck for Fetch products by filters
 export const fetchProductByFilter = createAsyncThunk(
     "products/fetchByFilters",
-    async ({ category, tags, }) => {
+    async ({ category, tags, keyword, weight }) => {
         const query = new URLSearchParams();
         if (category) query.append("category", category);
         if (tags) query.append("tags", tags);
+        if (keyword) query.append("keyword", keyword);
+        if (weight) query.append("weight", weight);
         const response = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}/api/filterProducts?${query.toString()}`
         );
