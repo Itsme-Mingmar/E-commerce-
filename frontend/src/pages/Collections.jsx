@@ -3,6 +3,7 @@ import ProductCard from "../components/Prouducts/ProductCard"
 import ProductFilter from "../components/Common/ProductFilter"
 import { FiFilter } from "react-icons/fi"
 import { IoMdClose } from "react-icons/io"
+import { FiSearch } from "react-icons/fi";
 import { fetchAllProducts, fetchProductByFilter } from "../redux/slices/productSlice"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
@@ -10,9 +11,26 @@ import { useEffect } from "react"
 
 const Collection = () => {
   const [filters, setFilters] = useState({
+    keyword: "",
     category: "",
     tags: ""
   })
+  const [searchInput, setSearchInput] = useState("");
+  const handleSearch = () => {
+
+    const updatedFilters = {
+      ...filters,
+      keyword: searchInput
+    };
+
+    setFilters(updatedFilters);
+
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const dispatch = useDispatch();
@@ -27,26 +45,49 @@ const Collection = () => {
 
   useEffect(() => {
 
-    if (filters.category || filters.tags) {
-
+    if (filters.keyword || filters.category || filters.tags) {
       dispatch(fetchProductByFilter(filters));
-
     } else {
-
       dispatch(fetchAllProducts());
-
     }
 
   }, [filters, dispatch]);
+
   if (loading) return <p>Loading similar products...</p>;
+
   if (error)
     return (
       <div className="text-center py-20 text-red-500">
         Error: {error}
       </div>
     );
+
   return (
-    <div className="container mx-auto px-6 py-16">
+    <div className="container mx-auto px-6 py-6">
+      {/* search bar */}
+      <div className="bg-white mb-8 p-4 rounded-lg shadow-sm">
+
+        <div className="flex items-center gap-2 max-w-xl mx-auto">
+
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-black"
+          />
+
+          <button
+            onClick={handleSearch}
+            className="bg-black text-white p-2 rounded-lg hover:bg-gray-800 transition"
+          >
+            <FiSearch size={20} />
+          </button>
+
+        </div>
+
+      </div>
 
       {/* MOBILE FILTER BUTTON */}
       <div className="flex justify-between items-center mb-6 md:hidden">

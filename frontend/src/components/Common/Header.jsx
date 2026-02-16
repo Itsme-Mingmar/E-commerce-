@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { HiBars3BottomRight } from "react-icons/hi2";
-import SearchBar from "./SearchBar";
 import CartDrawer from "./CartDrawer";
 import { useLocation, useNavigate } from "react-router-dom"
 
@@ -63,7 +62,6 @@ function Header() {
                 4
               </span>
             </button>
-            <SearchBar />
             <button onClick={() => setMobileMenuOpen(prev => !prev)} className="md:hidden cursor-pointer">
               <HiBars3BottomRight />
             </button>
