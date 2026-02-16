@@ -80,17 +80,7 @@ const productsSlice = createSlice({
             tag: "",
         }
     },
-    reducers: {
-        setFilters: (state, action) => {
-            state.filters = { ...state.filters, ...action.payload }
-        },
-        clearFilters: (state) => {
-            state.filters = {
-                category: "",
-                tag: "",
-            }
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
 
