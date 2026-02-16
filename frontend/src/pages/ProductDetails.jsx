@@ -43,7 +43,11 @@ const ProductDetails = () => {
     );
 
   if (!selectedProduct) return null;
-
+  //Cart handler
+  const handleAddToCart = (e)=>{
+    e.preventDefault();
+    //handle asyncthunk 
+  }
   return (
     <div className="container mx-auto px-6 md:px-20 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -110,7 +114,7 @@ const ProductDetails = () => {
             </button>
           </div>
 
-          <button className="bg-amber-400 px-16 md:px-24 py-3 rounded-lg font-semibold hover:bg-amber-500 transition">
+          <button onClick={handleAddToCart} className="bg-amber-400 px-16 md:px-24 py-3 rounded-lg font-semibold hover:bg-amber-500 transition">
             Add to Cart
           </button>
         </div>

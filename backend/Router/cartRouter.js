@@ -4,7 +4,7 @@ import softJwtVerify from "../middleware/softAuth.middleware.js";
 import jwtVerify from "../middleware/auth.middleware.js";
 
 const cartRouter = Router();
-cartRouter.put("/addToCart",softJwtVerify, addToCart);
+cartRouter.put("/addToCart", addToCart); // softJwtVerify
 cartRouter.delete("/deleteCartProduct", softJwtVerify, deleteCartProduct);
 cartRouter.get("/getCart", softJwtVerify, getCart);
 cartRouter.post("/mergeCart",jwtVerify, mergeCart);
