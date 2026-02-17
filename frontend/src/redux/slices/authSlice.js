@@ -26,9 +26,9 @@ export const loginUser = createAsyncThunk (
                 `${import.meta.env.VITE_BACKEND_URL}/api/userLogin`,
                 userData
             );
-            localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+            localStorage.setItem("userInfo", JSON.stringify(response.data.data));
             localStorage.setItem("userToken", response.data.token);
-            return response.data.user;
+            return response.data.data;
         } catch(error){
             return rejectWithValue(error.response);
         }
@@ -43,9 +43,9 @@ export const registerUser = createAsyncThunk (
                 `${import.meta.env.VITE_BACKEND_URL}/api/userRegister`,
                 userData
             );
-            localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+            localStorage.setItem("userInfo", JSON.stringify(response.data.data));
             localStorage.setItem("userToken", response.data.token);
-            return response.data.user;
+            return response.data.data;
         } catch(error){
             return rejectWithValue(error.response);
         }
@@ -61,8 +61,8 @@ const authSlice = createSlice({
             state.user = null;
             state.guestId= `guest_${new Date().getTime()}`;
             localStorage.removeItem("userInfo");
-            localStorage.removeItem("usertoken");
-            localStorage.setItemItem("guestId", state.guestId);
+            localStorage.removeItem("userT oken");
+            localStorage.setItem("guestId", state.guestId);
         },
         generateNewGuestId: (state)=>{
             state.guestId = `guest_${new Date().getTime()}`;
@@ -76,11 +76,11 @@ const authSlice = createSlice({
         })
         builder.addCase(loginUser.fulfilled, (state, action)=>{
             state.loading = false;
-            state.error = action.payload;
+            state.user = action.payload;
         })
         builder.addCase(loginUser.rejected, (state, action)=>{
             state.loading = false;
-            state.error = action.payload.message;
+            state.error = action.payload?.data?.message;
         })
         builder.addCase(registerUser.pending, (state)=>{
             state.loading = true;
@@ -88,11 +88,11 @@ const authSlice = createSlice({
         })
         builder.addCase(registerUser.fulfilled, (state, action)=>{
             state.loading = false;
-            state.error = action.payload;
+            state.user = action.payload;
         })
         builder.addCase(registerUser.rejected, (state, action)=>{
             state.loading = false;
-            state.error = action.payload.message;
+            state.error = action.payload?.data?.message;
         })
     }
 });
