@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/slices/authSlice"
+
 
 const Profile = () => {
-  const user = {
-    name: "Mingmar Tamang",
-    email: "mingmar@example.com"
-  }
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const orders = [
     {
@@ -30,11 +34,18 @@ const Profile = () => {
 
         {/* RIGHT: User Info */}
         <div className="border rounded-lg px-6 py-12 h-fit">
-          <p className="font-bold mb-4">{user.name}</p>
+          <p className="font-bold mb-4">{user?.name}</p>
 
-          <p className="font-normal mb-6 opacity-60">{user.email}</p>
+          <p className="font-normal mb-6 opacity-60">{user?.email}</p>
 
-          <button className="w-full bg-red-500 text-white py-2 rounded-lg cursor-pointer">
+          <button
+            onClick={async () => {
+              await dispatch(logout());
+              setTimeout(()=>{
+                navigate("/login");
+              },1000)
+            }} 
+            className="w-full bg-red-500 text-white py-2 rounded-lg cursor-pointer">
             Logout
           </button>
         </div>
