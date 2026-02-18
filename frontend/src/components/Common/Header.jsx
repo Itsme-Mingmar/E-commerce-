@@ -5,10 +5,13 @@ import { LiaShoppingBagSolid } from "react-icons/lia";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import CartDrawer from "./CartDrawer";
 import { useLocation, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux";
+
 
 function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -51,10 +54,22 @@ function Header() {
           </div>
 
           <div className="flex space-x-5 items-center relative">
-            <Link to={"/admin"} className="border rounded px-2 py-1">Admin</Link>
-            <Link to="/profile" className="hover:text-gray-500">
-              <CiUser className="w-5 h-5" />
-            </Link>
+            {
+              user && (
+                <Link to={"/admin"} className="border rounded px-2 py-1">Admin</Link>
+              )
+            }
+            {
+              user ? (
+                <button onClick={() => navigate("/profile")}>
+                  <CiUser className="w-5 h-5" />
+                </button>
+              ) : (
+                <Link to="/login" className="border px-3 py-1 rounded">
+                  Login
+                </Link>
+              )
+            }
 
             <button onClick={() => setDrawerOpen(true)} className="relative cursor-pointer">
               <LiaShoppingBagSolid className="w-5 h-5" />

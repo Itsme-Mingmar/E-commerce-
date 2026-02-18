@@ -8,11 +8,11 @@ const productRouter = Router();
 productRouter.post("/productRegister", jwtVerify, roleVerify, productRegister);
 productRouter.put("/productUpdate/:id", jwtVerify, roleVerify, productUpdate);
 productRouter.delete("/productDelete/:id",jwtVerify, roleVerify, productDelete);
-productRouter.get("/filterProducts", filterProduct); // add jwtVerify
-productRouter.get("/productDetails/:id", productDetails);  // add later jwtVerify
-productRouter.get("/similarProducts/:id", similarProducts); // add later jwtVerify
+productRouter.get("/filterProducts", filterProduct); 
+productRouter.get("/productDetails/:id", productDetails);  
+productRouter.get("/similarProducts/:id", similarProducts); 
 productRouter.post("/uploadImage", jwtVerify, roleVerify, upload.single("image"), uploadImage);
-productRouter.get("/getAllProducts", getAllProducts); // add jwtVerify
-productRouter.get("/getBestSeller", bestSeller); //  add jwt 
+productRouter.get("/getAllProducts", getAllProducts); 
+productRouter.get("/getBestSeller", bestSeller); 
 productRouter.get("/getNewArrivals", newArrival);
 export default productRouter;
