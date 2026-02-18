@@ -26,11 +26,13 @@ const userRegister = asyncHandler(async (req, res) => {
     const accessToken = accesstoken({ id: newUser._id, email: newUser.email });
     const options = {
         httpOnly: true,
+        secure: false,        // for localhost
+        sameSite: "lax"
     }
     res
         .status(201)
         .cookie("accessToken", accessToken, options)
-        .json(new apiResponse(201, "User created successfully", userCreated));
+        .json(new apiResponse(201, userCreated, "User created successfully"));
 });
 const userLogin = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
@@ -51,12 +53,12 @@ const userLogin = asyncHandler(async (req, res) => {
         httpOnly: true,
     }
     res.status(200)
-   .cookie("accessToken", accessToken, options)
-   .json(new apiResponse(
-       200,
-       loginClient,
-       "Login successfully"
-   ));
+        .cookie("accessToken", accessToken, options)
+        .json(new apiResponse(
+            200,
+            loginClient,
+            "Login successfully"
+        ));
 
 
 })
