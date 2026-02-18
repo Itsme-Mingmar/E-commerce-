@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { registerUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {toast} from "sonner";
 
 
 const Register = () => {
@@ -29,28 +30,27 @@ const Register = () => {
       alert("Passwords do not match")
       return
     }
+    setSubmitted(true);
     dispatch(registerUser({
       name: formData.name,
       email: formData.email,
       password: formData.password,
     }))
   }
+  const [submitted, setSubmitted] = useState(false);
+  useEffect(() => {
+  if (!submitted) return;
+
+  if (error) {
+    toast.error(`Fail to register: ${error}`);
+  } else if (user) {
+    toast.success("Registration successful");
+  }
+}, [error, user, submitted]);
+
+
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-
-      {/* Error message */}
-      {error && (
-        <p className="text-red-500 text-sm">
-          {error}
-        </p>
-      )}
-
-      {/* Success message */}
-      {user && (
-        <p className="text-green-500 text-sm">
-          Registration successful!
-        </p>
-      )}
 
       {/* Form Section */}
       <div className="flex items-center justify-center px-6  ">
