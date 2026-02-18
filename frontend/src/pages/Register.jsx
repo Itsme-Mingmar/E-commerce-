@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { registerUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {toast} from "sonner";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
@@ -12,8 +13,9 @@ const Register = () => {
     password: "",
     confirmPassword: ""
   })
-  const { loading, error, user } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
   const handleChange = (e) => {
@@ -23,31 +25,39 @@ const Register = () => {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match")
-      return
+      toast.error("Passwords do not match");
+      return;
     }
-    setSubmitted(true);
-    dispatch(registerUser({
-      name: formData.name,
-      email: formData.email,
-      password: formData.password,
-    }))
-  }
-  const [submitted, setSubmitted] = useState(false);
-  useEffect(() => {
-  if (!submitted) return;
 
-  if (error) {
-    toast.error(`Fail to register: ${error}`);
-  } else if (user) {
-    toast.success("Registration successful");
-  }
-}, [error, user, submitted]);
+    try {
+      await dispatch(
+        registerUser({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        })
+      ).unwrap();
+      toast.success("Registration successful.");
 
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+
+      
+    } catch (error) {
+      toast.error(error || "Registration failed" );
+    }
+  };
 
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">

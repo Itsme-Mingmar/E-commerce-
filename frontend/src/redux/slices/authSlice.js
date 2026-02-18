@@ -32,7 +32,7 @@ export const loginUser = createAsyncThunk (
             localStorage.setItem("userInfo", JSON.stringify(response.data.data));
             return response.data.data;
         } catch(error){
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.response.data.message);
         }
     }
 )
@@ -51,7 +51,7 @@ export const registerUser = createAsyncThunk (
             localStorage.setItem("userInfo", JSON.stringify(response.data.data));
             return response.data.data;
         } catch(error){
-            return rejectWithValue(error.response);
+            return rejectWithValue(error.response.data.message);
         }
     }
 )

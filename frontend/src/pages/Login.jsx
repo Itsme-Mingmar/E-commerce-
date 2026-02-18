@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { loginUser } from "../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +13,7 @@ const Login = () => {
   })
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -19,13 +22,31 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    dispatch(loginUser({
-      email:formData.email,
-      password: formData.password,
-    }));
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await dispatch(loginUser({
+        email: formData.email,
+        password: formData.password,
+      })).unwrap();
+
+      toast.success("Logging in.... ");
+
+      setFormData({
+        email: "",
+        password: ""
+      });
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+
+
+    } catch (error) {
+      toast.error(error || "Login failed ");
+    }
+  };
+
 
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
