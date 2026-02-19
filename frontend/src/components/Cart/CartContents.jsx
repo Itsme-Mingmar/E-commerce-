@@ -1,26 +1,12 @@
 import React from 'react'
 import { MdDeleteSweep } from "react-icons/md";
+import { useSelector } from 'react-redux';
 
 const CartContents = () => {
-  const cartProducts = [
-    {
-      productId: 1,
-      name: "Protein",
-      quantity: 1,
-      price: 5000,
-      image: "https://picsum.photos/200?random=1"
-    },
-    {
-      productId: 2,
-      name: "Protein",
-      quantity: 1,
-      price: 5000,
-      image: "https://picsum.photos/200?random=2"
-    }
-  ];
+  const { cart } = useSelector(state => state.cart);
   return (
     <div>
-      {cartProducts.map((product, index) => (
+      {cart?.products?.map((product, index) => (
         <div key={index} className="flex items-start justify-between py-4 border-b">
 
           <div className="flex items-start">

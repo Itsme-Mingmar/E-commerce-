@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SimilarProducts from "../components/Prouducts/SimilarProducts";
 import { fetchProductDetails } from "../redux/slices/productSlice";
+import { addToCart } from "../redux/slices/cartslice";
+
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-
+  const { user, guestId } = useSelector(state => state.auth);
   const { selectedProduct, loading, error } = useSelector(
     (state) => state.products
   );
@@ -44,9 +46,13 @@ const ProductDetails = () => {
 
   if (!selectedProduct) return null;
   //Cart handler
-  const handleAddToCart = (e)=>{
+  const handleAddToCart = (e) => {
     e.preventDefault();
-    //handle asyncthunk 
+    dispatch(addToCart({
+      productId: selectedProduct._id,
+      quantity,
+      guestId: user ? null : guestId
+    }));
   }
   return (
     <div className="container mx-auto px-6 md:px-20 py-12">

@@ -32,7 +32,7 @@ const addToCart = asyncHandler(async(req, res)=>{
         cart = new Cart({
             user: userId || undefined,
             guestId: userId ? undefined: guestId,
-            product: [],
+            products: [],
             totalPrice: 0
         })
     }
@@ -42,7 +42,7 @@ const addToCart = asyncHandler(async(req, res)=>{
     if(exitingItem !== -1){
         cart.product[exitingItem].quantity += quantity;
     }else{
-        cart.product.push({
+        cart.products.push({
             productId: product._id,
             name: product.name,
             Image: product.images,
@@ -50,7 +50,7 @@ const addToCart = asyncHandler(async(req, res)=>{
             quantity: quantity
         });
     }
-    cart.totalPrice = cart.product.reduce((total, item)=>{
+    cart.totalPrice = cart.products.reduce((total, item)=>{
         return total + (item.price*item.quantity);
     }, 0);
     await cart.save();
@@ -68,13 +68,13 @@ const deleteCartProduct = asyncHandler(async(req, res)=>{
     if(!cart){
         throw new apiError(400, "there is no cart with this user");
     }
-    cart.product = cart.product.filter((item)=>{
+    cart.products = cart.products.filter((item)=>{
         return item.productId.toString() !== productId
     })
-    cart.totalPrice = cart.product.reduce((total, item)=>{
+    cart.totalPrice = cart.products.reduce((total, item)=>{
         return total + (item.price * item.quantity);
     }, 0);
-    cart.save();
+    await cart.save();
     res.status(200).json( new apiResponse(200, cart, "Delete product successfully"));
 });
 const getCart = asyncHandler(async(req, res)=>{
@@ -109,21 +109,21 @@ const mergeCart = asyncHandler(async(req, res)=>{
     if(!finalCart){
         finalCart = new Cart({
             user: userId,
-            product: [],
+            products: [],
             totalPrice: 0 
         })
     }
-    guestCart.product.forEach((guestItem)=>{
-        const exitingItem = finalCart.product.find(
+    guestCart.products.forEach((guestItem)=>{
+        const exitingItem = finalCart.products.find(
             Item => Item.productId.toString() === guestItem.productId.toString()
         )
         if(exitingItem){
             exitingItem.quantity += guestItem.quantity;
         }else{
-            finalCart.product.push(guestItem);
+            finalCart.products.push(guestItem);
         }
     });
-    finalCart.totalPrice = finalCart.product.reduce((total, item)=>{
+    finalCart.totalPrice = finalCart.products.reduce((total, item)=>{
         return total + (item.price * item.quantity)
     }, 0);
     await finalCart.save();

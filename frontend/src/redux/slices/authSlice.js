@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios" 
+import { mergeCart, fetchCart } from './cartslice';
+
 
 // retive user info and token from localstorage 
 const userFromStorage = localStorage.getItem("userInfo")
@@ -18,24 +20,46 @@ const initialState = {
     error: null, 
 };
 // async thunk for user login
-export const loginUser = createAsyncThunk (
-    "auth/loginUser",
-    async(userData, {rejectWithValue}) => {
-        try{
-            const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}/api/userLogin`,
-                userData,
-                {
-                    withCredentials: true,
-                }
-            );
-            localStorage.setItem("userInfo", JSON.stringify(response.data.data));
-            return response.data.data;
-        } catch(error){
-            return rejectWithValue(error.response.data.message);
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (userData, { dispatch, getState, rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/userLogin`,
+        userData,
+        {
+          withCredentials: true,
         }
+      );
+
+      // Save user info
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify(response.data.data)
+      );
+
+      // Get guestId from state
+      const { guestId } = getState().auth;
+
+      //  If guest cart exists → merge
+      if (guestId) {
+        await dispatch(mergeCart({ guestId }));
+      }
+
+      //  Fetch updated user cart
+      await dispatch(fetchCart());
+
+      // Clear guestId from localStorage
+      localStorage.removeItem("guestId");
+
+      return response.data.data;
+
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
     }
-)
+  }
+);
+
 // async thunk for user Registration
 export const registerUser = createAsyncThunk (
     "auth/registerUser",
