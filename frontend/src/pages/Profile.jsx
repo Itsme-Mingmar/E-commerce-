@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../redux/slices/authSlice"
+import { logoutUser } from "../redux/slices/authSlice"
 
 
 const Profile = () => {
@@ -40,11 +40,9 @@ const Profile = () => {
 
           <button
             onClick={async () => {
-              await dispatch(logout());
-              setTimeout(()=>{
-                navigate("/login");
-              },1000)
-            }} 
+              await dispatch(logoutUser());
+              navigate("/login");
+            }}
             className="w-full bg-red-500 text-white py-2 rounded-lg cursor-pointer">
             Logout
           </button>
