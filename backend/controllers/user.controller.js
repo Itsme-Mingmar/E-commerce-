@@ -67,4 +67,25 @@ const userProfile = asyncHandler(async (req, res) => {
     console.log(client);
     res.status(200).json(new apiResponse(200, client, "get user profile"))
 });
-export { userRegister, userLogin, userProfile };
+export const userLogout = async (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: false, // true in production (https)
+      sameSite: "strict",
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Logout successful",
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Logout failed",
+    });
+  }
+};
+
+export { userRegister, userLogin, userProfile, userLogout };
