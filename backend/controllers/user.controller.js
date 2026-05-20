@@ -67,7 +67,7 @@ const userProfile = asyncHandler(async (req, res) => {
     console.log(client);
     res.status(200).json(new apiResponse(200, client, "get user profile"))
 });
-export const userLogout = async (req, res) => {
+const userLogout = async (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
