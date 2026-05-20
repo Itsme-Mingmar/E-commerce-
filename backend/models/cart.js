@@ -21,7 +21,7 @@ const cartSchema = new Schema({
         ref: "user",
     },
     guestId: String,
-    product: {
+    products: {
         type: [cartItemSchema],
         default: []
     },
