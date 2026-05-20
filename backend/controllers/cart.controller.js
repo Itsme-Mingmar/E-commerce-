@@ -99,7 +99,7 @@ const mergeCart = asyncHandler(async(req, res)=>{
     const {guestId} = req.body;
     const guestCart = await Cart.findOne({guestId: guestId});
     if(!guestCart){
-        res.status(200).json(new apiResponse(200, 
+        res.status(200).json(new apiResponse(200, null,
             "There is no guest cart"
         ));
     }
