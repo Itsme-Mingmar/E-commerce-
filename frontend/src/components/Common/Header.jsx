@@ -54,32 +54,52 @@ function Header() {
           </div>
 
           <div className="flex space-x-5 items-center relative">
-            {
-              user && (
-                <Link to={"/admin"} className="border rounded px-2 py-1">Admin</Link>
-              )
-            }
-            {
-              user ? (
-                <button onClick={() => navigate("/profile")}>
-                  <CiUser className="w-5 h-5" />
-                </button>
-              ) : (
-                <Link to="/login" className="border px-3 py-1 rounded">
-                  Login
-                </Link>
-              )
-            }
 
-            <button onClick={() => setDrawerOpen(true)} className="relative cursor-pointer">
-              <LiaShoppingBagSolid className="w-5 h-5" />
-              <span className="absolute -top-2 -right-2 bg-red-500 rounded-full text-white px-1.5 text-sm">
-                4
-              </span>
-            </button>
-            <button onClick={() => setMobileMenuOpen(prev => !prev)} className="md:hidden cursor-pointer">
+            {/* Show admin only if role is admin */}
+            {user?.role === "admin" && (
+              <Link
+                to="/admin"
+                className="border rounded px-2 py-1"
+              >
+                Admin
+              </Link>
+            )}
+
+            {/* User profile or login */}
+            {user ? (
+              <button onClick={() => navigate("/profile")}>
+                <CiUser className="w-5 h-5" />
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="border px-3 py-1 rounded"
+              >
+                Login
+              </Link>
+            )}
+
+            {/* Cart only for logged in users */}
+            {user && (
+              <button
+                onClick={() => setDrawerOpen(true)}
+                className="relative cursor-pointer"
+              >
+                <LiaShoppingBagSolid className="w-5 h-5" />
+
+                <span className="absolute -top-2 -right-2 bg-red-500 rounded-full text-white px-1.5 text-sm">
+                  4
+                </span>
+              </button>
+            )}
+
+            <button
+              onClick={() => setMobileMenuOpen(prev => !prev)}
+              className="md:hidden cursor-pointer"
+            >
               <HiBars3BottomRight />
             </button>
+
           </div>
         </div>
       </nav>
