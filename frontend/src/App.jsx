@@ -1,4 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { Provider, useDispatch, useSelector } from "react-redux";
+import store from "./redux/store";
+
+import { fetchCart } from './redux/slices/cartSlice';
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import UserLayout from './components/Layout/UserLayout';
 import Home from './pages/Home';
@@ -9,44 +14,62 @@ import Profile from './pages/Profile';
 import Collections from './pages/Collections';
 import Checkout from './pages/CheckOut';
 import Order from './pages/Order';
-import { Toaster } from 'sonner'
+import { Toaster } from 'sonner';
+
 import AdminLayout from './components/Admin/AdminLayout';
 import AdminHomePage from './components/Admin/AdminHomePage';
 import UserManagement from './components/Admin/UserManagement';
 import ProductManagement from './components/Admin/ProductManagement';
 import EditProductPage from './components/Admin/EditProductPage';
 import OrdersManagement from './components/Admin/OrdersManagement';
-import { Provider } from "react-redux"
-import store from "./redux/store"
+
+
+// This component is INSIDE Provider
+function AppContent() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCart());
+    }
+  }, [dispatch, user]);
+
+  return (
+    <BrowserRouter>
+      <Toaster position='top-right' />
+
+      <Routes>
+        <Route path='/' element={<UserLayout />}>
+          <Route index element={<Home />} />
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+          <Route path='profile' element={<Profile />} />
+          <Route path='checkout' element={<Checkout />} />
+          <Route path='order/:id' element={<Order />} />
+          <Route path='collections/:collection' element={<Collections />} />
+          <Route path='product/:id' element={<ProductDetails />} />
+        </Route>
+
+        <Route path='/admin' element={<AdminLayout />}>
+          <Route index element={<AdminHomePage />} />
+          <Route path='user' element={<UserManagement />} />
+          <Route path='product' element={<ProductManagement />} />
+          <Route path='orders' element={<OrdersManagement />} />
+          <Route path='product/edit/:id' element={<EditProductPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
 
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Toaster position='top-right' />
-        <Routes>
-          <Route path='/' element={<UserLayout />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/checkout' element={<Checkout />} />
-            <Route path='/order/:id' element={<Order />} />
-            <Route path='/collections/:collection' element={<Collections />} />
-            <Route path='/product/:id' element={<ProductDetails />} />
-          </Route>
-          <Route path='/admin' element={<AdminLayout />}>
-            <Route path='/admin' element={<AdminHomePage />} />
-            <Route path='/admin/user' element={<UserManagement />} />
-            <Route path='/admin/product' element={<ProductManagement />} />
-            <Route path='/admin/orders' element={<OrdersManagement />} />
-            <Route path='/admin/product/edit/:id' element={<EditProductPage />} />
-            {/* admin route */}
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppContent />
     </Provider>
-  )
+  );
 }
-export default App
+
+export default App;
