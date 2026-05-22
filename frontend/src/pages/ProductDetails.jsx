@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import SimilarProducts from "../components/Prouducts/SimilarProducts";
 import { fetchProductDetails } from "../redux/slices/productSlice";
 import { addToCart } from "../redux/slices/cartslice";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { user, guestId } = useSelector(state => state.auth);
-  const { selectedProduct, loading, error } = useSelector(
-    (state) => state.products
-  );
+  const navigate = useNavigate();
+  const { user } = useSelector(state => state.auth);  // no guestId needed
+  const { selectedProduct, loading, error } = useSelector(state => state.products);
 
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState("");
@@ -21,7 +21,6 @@ const ProductDetails = () => {
     dispatch(fetchProductDetails(id));
   }, [dispatch, id]);
 
-  // Set first image after product loads
   useEffect(() => {
     if (selectedProduct?.images?.length > 0) {
       setActiveImage(selectedProduct.images[0].url);
@@ -29,9 +28,21 @@ const ProductDetails = () => {
   }, [selectedProduct]);
 
   const handleQuantity = (action) => {
-    if (action === "plus") setQuantity((prev) => prev + 1);
-    if (action === "minus" && quantity > 1)
-      setQuantity((prev) => prev - 1);
+    if (action === "plus") setQuantity(prev => prev + 1);
+    if (action === "minus" && quantity > 1) setQuantity(prev => prev - 1);
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    // FIX: redirect to login if not authenticated
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    dispatch(addToCart({
+      productId: selectedProduct._id,
+      quantity,
+    }));
   };
 
   if (loading)
@@ -45,15 +56,6 @@ const ProductDetails = () => {
     );
 
   if (!selectedProduct) return null;
-  //Cart handler
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    dispatch(addToCart({
-      productId: selectedProduct._id,
-      quantity,
-      guestId: user ? null : guestId
-    }));
-  }
   return (
     <div className="container mx-auto px-6 md:px-20 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
