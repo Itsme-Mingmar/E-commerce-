@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from "axios"
-import { mergeCart, fetchCart } from './cartslice';
 import { clearCart } from './cartslice';
 
 
@@ -23,7 +22,7 @@ const initialState = {
 // async thunk for user login
 export const loginUser = createAsyncThunk(
     "auth/loginUser",
-    async (userData, { dispatch, getState, rejectWithValue }) => {
+    async (userData, { rejectWithValue }) => {
         try {
             const response = await axios.post(
                 `${import.meta.env.VITE_BACKEND_URL}/api/userLogin`,
@@ -38,20 +37,6 @@ export const loginUser = createAsyncThunk(
                 "userInfo",
                 JSON.stringify(response.data.data)
             );
-
-            // Get guestId from state
-            const { guestId } = getState().auth;
-
-            //  If guest cart exists → merge
-            if (guestId) {
-                await dispatch(mergeCart({ guestId }));
-            }
-
-            //  Fetch updated user cart
-            await dispatch(fetchCart());
-
-            // Clear guestId from localStorage
-            localStorage.removeItem("guestId");
 
             return response.data.data;
 
