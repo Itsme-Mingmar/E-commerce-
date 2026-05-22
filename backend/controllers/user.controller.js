@@ -68,24 +68,24 @@ const userProfile = asyncHandler(async (req, res) => {
     res.status(200).json(new apiResponse(200, client, "get user profile"))
 });
 const userLogout = async (req, res) => {
-  try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: false, // true in production (https)
-      sameSite: "strict",
-    });
+    try {
+        res.clearCookie("accessToken", {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
+        });
 
-    return res.status(200).json({
-      success: true,
-      message: "Logout successful",
-    });
+        return res.status(200).json({
+            success: true,
+            message: "Logout successful",
+        });
 
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Logout failed",
-    });
-  }
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Logout failed",
+        });
+    }
 };
 
 export { userRegister, userLogin, userProfile, userLogout };
